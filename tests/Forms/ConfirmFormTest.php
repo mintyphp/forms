@@ -8,22 +8,17 @@ use MintyPHP\Form\Form;
 use MintyPHP\Form\Elements as E;
 use MintyPHP\Form\Validator\Validators as V;
 
-class BooleanFormTest extends TestCase
+class ConfirmFormTest extends TestCase
 {
     private function createForm(string $style): Form
     {
-        $booleans = [
-            '' => 'Select an option',
-            'yes' => 'Yes',
-            'no' => 'No',
-        ];
         E::$style = $style;
         return E::form()->fields([
             E::field()
-                ->label(E::label('Yes or No?'))
-                ->control(E::select('bool', $booleans))
+                ->label(E::label('I agree to the terms and conditions'))
+                ->control(E::checkbox('confirm'))
                 ->validators([
-                    V::required('Field cannot be empty'),
+                    V::required('Field must be checked'),
                 ]),
         ]);
     }
@@ -34,12 +29,8 @@ class BooleanFormTest extends TestCase
         $lines = [
             '<form method="post">',
             '  <div>',
-            '    <label for="bool">Yes or No?</label>',
-            '    <select id="bool" name="bool">',
-            '      <option value="">Select an option</option>',
-            '      <option value="yes">Yes</option>',
-            '      <option value="no">No</option>',
-            '    </select>',
+            '    <label for="confirm">I agree to the terms and conditions</label>',
+            '    <input id="confirm" type="checkbox" name="confirm" value="on"/>',
             '  </div>',
             '</form>',
         ];
@@ -52,14 +43,10 @@ class BooleanFormTest extends TestCase
         $lines = [
             '<form method="post">',
             '  <div class="field">',
-            '    <label class="label" for="bool">Yes or No?</label>',
-            '    <div class="select">',
-            '      <select id="bool" name="bool">',
-            '        <option value="">Select an option</option>',
-            '        <option value="yes">Yes</option>',
-            '        <option value="no">No</option>',
-            '      </select>',
-            '    </div>',
+            '    <label class="checkbox">',
+            '      <input type="checkbox" name="confirm" value="on"/>',
+            '       I agree to the terms and conditions',
+            '    </label>',
             '  </div>',
             '</form>',
         ];
@@ -69,16 +56,12 @@ class BooleanFormTest extends TestCase
     public function testFillForm(): void
     {
         $form = $this->createForm('none');
-        $form->fill(['bool' => 'yes']);
+        $form->fill(['confirm' => '']);
         $lines = [
             '<form method="post">',
             '  <div>',
-            '    <label for="bool">Yes or No?</label>',
-            '    <select id="bool" name="bool">',
-            '      <option value="">Select an option</option>',
-            '      <option value="yes" selected="selected">Yes</option>',
-            '      <option value="no">No</option>',
-            '    </select>',
+            '    <label for="confirm">I agree to the terms and conditions</label>',
+            '    <input id="confirm" type="checkbox" name="confirm" value="on"/>',
             '  </div>',
             '</form>',
         ];
@@ -106,19 +89,6 @@ class BooleanFormTest extends TestCase
         $this->assertEquals(implode("\n", $lines), $form->__toString());
         $form->fill(['bool' => 'in-between']);
         $this->assertFalse($form->validate());
-        $lines = [
-            '<form method="post">',
-            '  <div class="error">',
-            '    <label for="bool">Yes or No?</label>',
-            '    <select id="bool" name="bool">',
-            '      <option value="">Select an option</option>',
-            '      <option value="yes">Yes</option>',
-            '      <option value="no">No</option>',
-            '    </select>',
-            '    <div>Field cannot be empty</div>',
-            '  </div>',
-            '</form>',
-        ];
         $this->assertEquals(implode("\n", $lines), $form->__toString());
         $form->fill(['bool' => 'no']);
         $this->assertTrue($form->validate());
@@ -160,21 +130,6 @@ class BooleanFormTest extends TestCase
         $this->assertEquals(implode("\n", $lines), $form->__toString());
         $form->fill(['bool' => 'in-between']);
         $this->assertFalse($form->validate());
-        $lines = [
-            '<form method="post">',
-            '  <div class="field">',
-            '    <label class="label" for="bool">Yes or No?</label>',
-            '    <div class="select is-danger">',
-            '      <select id="bool" name="bool">',
-            '        <option value="">Select an option</option>',
-            '        <option value="yes">Yes</option>',
-            '        <option value="no">No</option>',
-            '      </select>',
-            '    </div>',
-            '    <p class="help is-danger">Field cannot be empty</p>',
-            '  </div>',
-            '</form>',
-        ];
         $this->assertEquals(implode("\n", $lines), $form->__toString());
         $form->fill(['bool' => 'no']);
         $this->assertTrue($form->validate());

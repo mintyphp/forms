@@ -5,23 +5,16 @@ namespace MintyPHP\Form;
 use DOMElement;
 use MintyPHP\Form\Validator\Validator;
 
-class FormInput implements FormControl
+class FormCheckbox extends FormInput
 {
     use HtmlElement;
 
-    protected string $name = '';
-    protected string $value = '';
-    protected string $type = 'text';
-    protected string $placeholder = '';
-
-    protected bool $disabled = false;
-    protected bool $readonly = false;
-    protected bool $required = false;
-    protected bool $autofocus = false;
+    protected bool $checked = false;
 
     public function __construct()
     {
         $this->tag('input');
+        $this->type('checkbox');
     }
 
     public function type(string $type): self
@@ -59,10 +52,15 @@ class FormInput implements FormControl
     public function fill(array $data): void
     {
         if (key_exists($this->name, $data)) {
-            if (!is_array($data[$this->name])) {
-                $this->value = trim($data[$this->name]);
+            if (is_array($data[$this->name])) {
+                $selected = $data[$this->name];
+            } else {
+                $selected = array_filter([$data[$this->name]]);
             }
+        } else {
+            $selected = [];
         }
+        $this->checked = in_array($this->value, $selected);
     }
 
     public function validate(Validator $validator): string

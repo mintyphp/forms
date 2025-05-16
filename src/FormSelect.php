@@ -10,9 +10,10 @@ class FormSelect implements FormControl
     use HtmlElement;
 
     protected string $name = '';
-    protected string $value = '';
     /** @var array<string,string> $options */
     protected array $options = [];
+    /** @var array<string,bool> $checked */
+    protected array $checked = [];
 
     public function __construct()
     {
@@ -30,38 +31,41 @@ class FormSelect implements FormControl
         return $this->name;
     }
 
-    public function value(string $value): self
-    {
-        if (in_array($value, array_keys($this->options))) {
-            $this->value = $value;
-        } else {
-            $this->value = '';
-        }
-        return $this;
-    }
-
     /**
      * @param array<string,string> $options
      */
     public function options(array $options): self
     {
         $this->options = $options;
+        foreach ($options as $key => $value) {
+            $this->checked[$key] = false;
+        }
         return $this;
     }
 
     /**
-     * @param array<string, string> $data
+     * @param array<string, string|array<string>> $data
      */
     public function fill(array $data): void
     {
         if (key_exists($this->name, $data)) {
-            $this->value(trim($data[$this->name]));
+            $optionKeys = array_keys($this->options);
+            $value = $data[$this->name];
+            if (is_array($value)) {
+                foreach ($optionKeys as $optionKey) {
+                    $this->checked[$optionKey] = in_array($optionKey, $value);
+                }
+            } else {
+                foreach ($optionKeys as $optionKey) {
+                    $this->checked[$optionKey] = $optionKey == $value;
+                }
+            }
         }
     }
 
     public function validate(Validator $validator): string
     {
-        return $validator->validate($this->value);
+        return $validator->validate(implode(',', array_keys(array_filter($this->checked))));
     }
 
     public function setError(string $message): void {}
@@ -73,7 +77,7 @@ class FormSelect implements FormControl
         foreach ($this->options as $key => $value) {
             $option = $doc->createElement('option');
             $option->setAttribute('value', $key);
-            if ($key === $this->value) {
+            if ($this->checked[$key]) {
                 $option->setAttribute('selected', 'selected');
             }
             $option->textContent = $value;

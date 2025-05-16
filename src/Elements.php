@@ -58,6 +58,19 @@ class Elements
         return $input;
     }
 
+    public static function checkbox(string $name = '', string $value = 'on'): FormCheckbox
+    {
+        /** @var FormCheckbox */
+        $input = self::create('FormCheckbox');
+        if ($name) {
+            $input->name($name);
+        }
+        if ($value) {
+            $input->value($value);
+        }
+        return $input;
+    }
+
     /**
      * @param array<string, string> $options
      */
@@ -73,6 +86,22 @@ class Elements
         }
         return $select;
     }
+
+    // /**
+    //  * @param array<string, string> $options
+    //  */
+    // public static function checkboxes(string $name = '', array $options = []): FormCheckboxes
+    // {
+    //     /** @var FormCheckboxes */
+    //     $checkboxes = self::create('FormCheckboxes');
+    //     if ($name) {
+    //         $checkboxes->name($name);
+    //     }
+    //     if ($options) {
+    //         $checkboxes->options($options);
+    //     }
+    //     return $checkboxes;
+    // }
 
     public static function label(string $caption = ''): FormLabel
     {

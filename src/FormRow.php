@@ -42,7 +42,7 @@ class FormRow
     }
 
     /**
-     * @param array<string, string> $data
+     * @param array<string, string|array<string>> $data
      */
     public function fill(array $data): void
     {
