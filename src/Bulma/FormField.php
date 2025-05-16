@@ -3,6 +3,7 @@
 namespace MintyPHP\Form\Bulma;
 
 use MintyPHP\Form\FormCheckbox;
+use MintyPHP\Form\FormCheckboxes;
 use MintyPHP\Form\FormField as Base;
 
 class FormField extends Base
@@ -32,6 +33,15 @@ class FormField extends Base
             $label->appendChild($control);
             $label->insertAdjacentText('beforeend', $text);
             $field->appendChild($label);
+            if ($this->error) {
+                $field->appendChild($this->error->render($doc));
+            }
+            return $field;
+        }
+        if ($this->control instanceof FormCheckboxes && $this->label) {
+            $field = $this->renderElement($doc);
+            $field->appendChild($this->label->render($doc));
+            $field->appendChild($this->control->render($doc));
             if ($this->error) {
                 $field->appendChild($this->error->render($doc));
             }

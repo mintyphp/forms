@@ -12,8 +12,8 @@ class FormSelect implements FormControl
     protected string $name = '';
     /** @var array<string,string> $options */
     protected array $options = [];
-    /** @var array<string,bool> $checked */
-    protected array $checked = [];
+    /** @var string[] $values */
+    protected array $values = [];
 
     public function __construct()
     {
@@ -37,18 +37,12 @@ class FormSelect implements FormControl
     public function options(array $options): self
     {
         $this->options = $options;
-        foreach ($options as $key => $value) {
-            $this->checked[$key] = false;
-        }
         return $this;
     }
 
     public function value(string $value): self
     {
-        $values = explode(',', $value);
-        foreach (array_keys($this->options) as $key) {
-            $this->checked[$key] = in_array($key, $values);
-        }
+        $this->values = [$value];
         return $this;
     }
 
@@ -61,14 +55,15 @@ class FormSelect implements FormControl
         if (!is_array($values)) {
             $values = [$values];
         }
-        foreach (array_keys($this->options) as $key) {
-            $this->checked[$key] = in_array($key, $values);
-        }
+        $this->values = $values;
     }
 
     public function validate(Validator $validator): string
     {
-        return $validator->validate(implode(',', array_keys(array_filter($this->checked))));
+        if (array_diff($this->values, array_keys($this->options))) {
+            return 'Invalid option value';
+        }
+        return $validator->validate(implode(',', $this->values));
     }
 
     public function setError(string $message): void {}
@@ -80,7 +75,7 @@ class FormSelect implements FormControl
         foreach ($this->options as $key => $value) {
             $option = $doc->createElement('option');
             $option->setAttribute('value', $key);
-            if ($this->checked[$key]) {
+            if (in_array($key, $this->values)) {
                 $option->setAttribute('selected', 'selected');
             }
             $option->textContent = $value;

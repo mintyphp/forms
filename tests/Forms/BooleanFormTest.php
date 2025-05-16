@@ -110,7 +110,7 @@ class BooleanFormTest extends TestCase
             '      <option value="yes">Yes</option>',
             '      <option value="no">No</option>',
             '    </select>',
-            '    <div>Field cannot be empty</div>',
+            '    <div>Invalid option value</div>',
             '  </div>',
             '</form>',
         ];
@@ -166,7 +166,7 @@ class BooleanFormTest extends TestCase
             '        <option value="no">No</option>',
             '      </select>',
             '    </div>',
-            '    <p class="help is-danger">Field cannot be empty</p>',
+            '    <p class="help is-danger">Invalid option value</p>',
             '  </div>',
             '</form>',
         ];

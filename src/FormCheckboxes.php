@@ -12,8 +12,8 @@ class FormCheckboxes implements FormControl
     protected string $name = '';
     /** @var array<string,string> $options */
     protected array $options = [];
-    /** @var array<string,bool> $checked */
-    protected array $checked = [];
+    /** @var string[] $values */
+    protected array $values = [];
 
     public function __construct()
     {
@@ -37,18 +37,12 @@ class FormCheckboxes implements FormControl
     public function options(array $options): self
     {
         $this->options = $options;
-        foreach ($options as $key => $value) {
-            $this->checked[$key] = false;
-        }
         return $this;
     }
 
     public function value(string $value): self
     {
-        $values = explode(',', $value);
-        foreach (array_keys($this->options) as $key) {
-            $this->checked[$key] = in_array($key, $values);
-        }
+        $this->values = [$value];
         return $this;
     }
 
@@ -61,30 +55,35 @@ class FormCheckboxes implements FormControl
         if (!is_array($values)) {
             $values = [$values];
         }
-        foreach (array_keys($this->options) as $key) {
-            $this->checked[$key] = in_array($key, $values);
-        }
+        $this->values = $values;
     }
 
     public function validate(Validator $validator): string
     {
-        return $validator->validate(implode(',', array_keys(array_filter($this->checked))));
+        if (array_diff($this->values, array_keys($this->options))) {
+            return 'Invalid checkbox value';
+        }
+        return $validator->validate(implode(',', $this->values));
     }
 
     public function setError(string $message): void {}
 
     public function render(\DOMDocument $doc): \DOMElement
     {
-        $wrapper = $doc->createElement('div');
+        $wrapper = $doc->createElement('fieldset');
+        $wrapperId = $this->getId();
+        $wrapper->setAttribute('id', $wrapperId);
         foreach ($this->options as $key => $value) {
             $checkbox = $this->renderElement($doc);
+            $checkbox->setAttribute('id', $this->name . '_' . $key);
             $checkbox->setAttribute('name', $this->name);
             $checkbox->setAttribute('value', $key);
-            if ($this->checked[$key]) {
+            if (in_array($key, $this->values)) {
                 $checkbox->setAttribute('checked', 'checked');
             }
             $wrapper->appendChild($checkbox);
             $label = $doc->createElement('label');
+            $label->setAttribute('for', $this->name . '_' . $key);
             $label->textContent = $value;
             $wrapper->appendChild($label);
         }
