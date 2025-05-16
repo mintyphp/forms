@@ -43,23 +43,26 @@ class FormSelect implements FormControl
         return $this;
     }
 
+    public function value(string $value): self
+    {
+        $values = explode(',', $value);
+        foreach (array_keys($this->options) as $key) {
+            $this->checked[$key] = in_array($key, $values);
+        }
+        return $this;
+    }
+
     /**
-     * @param array<string, string|array<string>> $data
+     * @param array<string, string|string[]> $data
      */
     public function fill(array $data): void
     {
-        if (key_exists($this->name, $data)) {
-            $optionKeys = array_keys($this->options);
-            $value = $data[$this->name];
-            if (is_array($value)) {
-                foreach ($optionKeys as $optionKey) {
-                    $this->checked[$optionKey] = in_array($optionKey, $value);
-                }
-            } else {
-                foreach ($optionKeys as $optionKey) {
-                    $this->checked[$optionKey] = $optionKey == $value;
-                }
-            }
+        $values = $data[$this->name] ?? [];
+        if (!is_array($values)) {
+            $values = [$values];
+        }
+        foreach (array_keys($this->options) as $key) {
+            $this->checked[$key] = in_array($key, $values);
         }
     }
 

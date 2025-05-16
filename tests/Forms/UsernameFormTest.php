@@ -13,14 +13,8 @@ class UsernameFormTest extends TestCase
     private function createForm(string $style): Form
     {
         E::$style = $style;
-        return E::form()->fields([
-            E::field()
-                ->label(E::label('Username'))
-                ->control(E::email('username', 'Enter your email'))
-                ->validators([
-                    V::required('Username is required'),
-                    V::email('Enter a valid email address')
-                ]),
+        return E::form([
+            E::field(E::label('Username'), E::email('username', 'Enter your email'), [V::required('Username is required'), V::email('Enter a valid email address')]),
         ]);
     }
 

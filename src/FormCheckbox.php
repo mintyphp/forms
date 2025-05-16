@@ -40,14 +40,8 @@ class FormCheckbox extends FormInput
         return $this;
     }
 
-    public function placeholder(string $placeholder): self
-    {
-        $this->placeholder = $placeholder;
-        return $this;
-    }
-
     /**
-     * @param array<string, string|array<string>> $data
+     * @param array<string, string|string[]> $data
      */
     public function fill(array $data): void
     {
@@ -65,7 +59,7 @@ class FormCheckbox extends FormInput
 
     public function validate(Validator $validator): string
     {
-        return $validator->validate($this->value);
+        return $validator->validate($this->checked ? $this->value : '');
     }
 
     public function setError(string $message): void {}
@@ -76,8 +70,8 @@ class FormCheckbox extends FormInput
         $input->setAttribute('type', $this->type);
         $input->setAttribute('name', $this->name);
         $input->setAttribute('value', $this->value);
-        if ($this->placeholder) {
-            $input->setAttribute('placeholder', $this->placeholder);
+        if ($this->checked) {
+            $input->setAttribute('checked', 'checked');
         }
         return $input;
     }

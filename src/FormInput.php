@@ -54,15 +54,15 @@ class FormInput implements FormControl
     }
 
     /**
-     * @param array<string, string|array<string>> $data
+     * @param array<string, string|string[]> $data
      */
     public function fill(array $data): void
     {
-        if (key_exists($this->name, $data)) {
-            if (!is_array($data[$this->name])) {
-                $this->value = trim($data[$this->name]);
-            }
+        $values = $data[$this->name] ?? [];
+        if (!is_array($values)) {
+            $values = [$values];
         }
+        $this->value = trim($values[0] ?? '');
     }
 
     public function validate(Validator $validator): string

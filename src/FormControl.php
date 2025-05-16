@@ -10,8 +10,9 @@ interface FormControl
     public function getId(): string;
     public function name(string $name): self;
     public function getName(): string;
+    public function value(string $value): self;
     /**
-     * @param array<string, string|array<string>> $data
+     * @param array<string, string|string[]> $data
      */
     public function fill(array $data): void;
     public function validate(Validator $validator): string;

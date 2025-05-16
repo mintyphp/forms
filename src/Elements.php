@@ -2,6 +2,8 @@
 
 namespace MintyPHP\Form;
 
+use MintyPHP\Form\Validator\Validator;
+
 class Elements
 {
     public static string $style = 'none';
@@ -11,12 +13,38 @@ class Elements
         'bulma' => 'MintyPHP\\Form\\Bulma\\',
     ];
 
-    public static function form(): Form
+    /**
+     * @param FormField[] $fields
+     */
+    public static function form(array $fields = []): Form
     {
         /** @var Form */
         $form = self::create('Form');
+        if ($fields) {
+            $form->fields($fields);
+        }
         return $form;
     }
+
+    /**
+     * @param Validator[] $validators
+     */
+    public static function field(?FormLabel $label = null, ?FormControl $control = null, array $validators = []): FormField
+    {
+        /** @var FormField */
+        $field = self::create('FormField');
+        if ($label) {
+            $field->label($label);
+        }
+        if ($control) {
+            $field->control($control);
+        }
+        if ($validators) {
+            $field->validators($validators);
+        }
+        return $field;
+    }
+
 
     public static function create(string $className): object
     {
@@ -87,21 +115,21 @@ class Elements
         return $select;
     }
 
-    // /**
-    //  * @param array<string, string> $options
-    //  */
-    // public static function checkboxes(string $name = '', array $options = []): FormCheckboxes
-    // {
-    //     /** @var FormCheckboxes */
-    //     $checkboxes = self::create('FormCheckboxes');
-    //     if ($name) {
-    //         $checkboxes->name($name);
-    //     }
-    //     if ($options) {
-    //         $checkboxes->options($options);
-    //     }
-    //     return $checkboxes;
-    // }
+    /**
+     * @param array<string, string> $options
+     */
+    public static function checkboxes(string $name = '', array $options = []): FormCheckboxes
+    {
+        /** @var FormCheckboxes */
+        $checkboxes = self::create('FormCheckboxes');
+        if ($name) {
+            $checkboxes->name($name);
+        }
+        if ($options) {
+            $checkboxes->options($options);
+        }
+        return $checkboxes;
+    }
 
     public static function label(string $caption = ''): FormLabel
     {
@@ -111,13 +139,6 @@ class Elements
             $label->caption($caption);
         }
         return $label;
-    }
-
-    public static function field(): FormField
-    {
-        /** @var FormField */
-        $field = self::create('FormField');
-        return $field;
     }
 
     public static function header(): FormHeader

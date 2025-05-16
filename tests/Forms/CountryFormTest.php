@@ -25,13 +25,8 @@ class CountryFormTest extends TestCase
             'SE' => 'Sweden',
         ];
         E::$style = $style;
-        return E::form()->fields([
-            E::field()
-                ->label(E::label('Choose countries'))
-                ->control(E::checkboxes('countries', $countries))
-                ->validators([
-                    V::required('Field cannot be empty'),
-                ]),
+        return E::form([
+            E::field(E::label('Choose countries'), E::checkboxes('countries', $countries), [V::required('Field cannot be empty')]),
         ]);
     }
 
