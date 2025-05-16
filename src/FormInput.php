@@ -1,0 +1,79 @@
+<?php
+
+namespace MintyPHP\Form;
+
+use DOMElement;
+use MintyPHP\Form\Validator\Validator;
+
+class FormInput implements FormControl
+{
+    use HtmlElement;
+
+    protected string $name = '';
+    protected string $value = '';
+    protected string $type = 'text';
+    protected string $placeholder = '';
+
+    public function __construct()
+    {
+        $this->tag('input');
+    }
+
+    public function type(string $type): self
+    {
+        $this->type = strtolower($type);
+        return $this;
+    }
+
+    public function name(string $name): self
+    {
+        $this->name = $name;
+        return $this;
+    }
+
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    public function value(string $value): self
+    {
+        $this->value = $value;
+        return $this;
+    }
+
+    public function placeholder(string $placeholder): self
+    {
+        $this->placeholder = $placeholder;
+        return $this;
+    }
+
+    /**
+     * @param array<string, string> $data
+     */
+    public function fill(array $data): void
+    {
+        if (key_exists($this->name, $data)) {
+            $this->value = trim($data[$this->name]);
+        }
+    }
+
+    public function validate(Validator $validator): string
+    {
+        return $validator->validate($this->value);
+    }
+
+    public function setError(string $message): void {}
+
+    public function render(\DOMDocument $doc): \DOMElement
+    {
+        $input = $this->renderElement($doc);
+        $input->setAttribute('type', $this->type);
+        $input->setAttribute('name', $this->name);
+        $input->setAttribute('value', $this->value);
+        if ($this->placeholder) {
+            $input->setAttribute('placeholder', $this->placeholder);
+        }
+        return $input;
+    }
+}

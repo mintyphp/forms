@@ -1,0 +1,33 @@
+<?php
+
+namespace MintyPHP\Form\Bulma;
+
+use DOMElement;
+use MintyPHP\Form\FormInput as Base;
+
+class FormInput extends Base
+{
+    public function __construct()
+    {
+        parent::__construct();
+        $this->class('input');
+    }
+
+    public function setError(string $message): void
+    {
+        if ($message) {
+            $this->addClass('is-danger');
+        } else {
+            $this->removeClass('is-danger');
+        }
+    }
+
+    public function render(\DOMDocument $doc): \DOMElement
+    {
+        $wrapper = $doc->createElement('div');
+        $wrapper->setAttribute('class', 'control');
+        $input = parent::render($doc);
+        $wrapper->appendChild($input);
+        return $wrapper;
+    }
+}
