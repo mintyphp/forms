@@ -58,6 +58,21 @@ class Elements
         return $input;
     }
 
+    /**
+     * @param array<string, string> $options
+     */
+    public static function select(string $name = '', array $options = []): FormSelect
+    {
+        /** @var FormSelect */
+        $select = self::create('FormSelect');
+        if ($name) {
+            $select->name($name);
+        }
+        if ($options) {
+            $select->options($options);
+        }
+        return $select;
+    }
 
     public static function label(string $caption = ''): FormLabel
     {
