@@ -14,11 +14,6 @@ class FormInput implements FormControl
     protected string $type = 'text';
     protected string $placeholder = '';
 
-    protected bool $disabled = false;
-    protected bool $readonly = false;
-    protected bool $required = false;
-    protected bool $autofocus = false;
-
     public function __construct()
     {
         $this->tag('input');

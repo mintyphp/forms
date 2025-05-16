@@ -17,9 +17,38 @@ class FormField
 
     protected bool $hideError = false;
 
+    protected bool $disabled = false;
+    protected bool $readonly = false;
+    protected bool $required = false;
+    protected bool $autofocus = false;
+
     public function __construct()
     {
         $this->tag('div');
+    }
+
+    public function disabled(): self
+    {
+        $this->disabled = true;
+        return $this;
+    }
+
+    public function readonly(): self
+    {
+        $this->readonly = true;
+        return $this;
+    }
+
+    public function required(): self
+    {
+        $this->required = true;
+        return $this;
+    }
+
+    public function autofocus(): self
+    {
+        $this->autofocus = true;
+        return $this;
     }
 
     public function label(FormLabel $label): self
@@ -118,7 +147,20 @@ class FormField
             $field->appendChild($this->label->render($doc));
         }
         if ($this->control) {
-            $field->appendChild($this->control->render($doc));
+            $control = $this->control->render($doc);
+            if ($this->disabled) {
+                $control->setAttribute('disabled', 'disabled');
+            }
+            if ($this->readonly) {
+                $control->setAttribute('readonly', 'readonly');
+            }
+            if ($this->required) {
+                $control->setAttribute('required', 'required');
+            }
+            if ($this->autofocus) {
+                $control->setAttribute('autofocus', 'autofocus');
+            }
+            $field->appendChild($control);
         }
         if ($this->error) {
             $field->appendChild($this->error->render($doc));
