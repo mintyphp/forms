@@ -151,11 +151,30 @@ class Form
         return $formElement;
     }
 
+    private function addCsrfInput(\DOMDocument $doc, \DOMElement $form): void
+    {
+        if (!$form->getAttribute('method') || $form->getAttribute('method') == 'GET') {
+            return;
+        }
+        if (class_exists('MintyPHP\Session')) {
+            ob_start();
+            // @phpstan-ignore-next-line
+            forward_static_call(['MintyPHP\Session', 'getCsrfInput']);
+            $csrfInput = ob_get_clean();
+            if ($csrfInput) {
+                $form->appendChild($doc->createTextNode($csrfInput));
+            }
+        }
+    }
+
     public function __toString(): string
     {
         // save the DOMElement to a string
         $domDocument = new \DOMDocument('1.0', 'UTF-8');
-        $domDocument->appendChild($this->render($domDocument));
+        $form = $this->render($domDocument);
+        $this->addCsrfInput($domDocument, $form);
+        $domDocument->appendChild($form);
+        // format the output
         $domDocument->formatOutput = true;
         $domDocument->preserveWhiteSpace = false;
         // remove the XML declaration
