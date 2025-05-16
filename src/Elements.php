@@ -78,26 +78,29 @@ class Elements
 
     public static function header(): FormHeader
     {
-        return new FormHeader();
+        /** @var FormHeader */
+        $header = self::create('FormHeader');
+        return $header;
     }
 
     public static function legend(): FormLegend
     {
-        return new FormLegend();
+        /** @var FormLegend */
+        $legend = self::create('FormLegend');
+        return $legend;
     }
 
-    //public static function control(): FormControl
-    //{
-    //    return new FormControl();
-    //}
-    //
-    //public static function error(): FormError
-    //{
-    //    return new FormError();
-    //}
+    public static function error(): FormError
+    {
+        /** @var FormError */
+        $error = self::create('FormError');
+        return $error;
+    }
 
     public static function row(): FormRow
     {
-        return new FormRow();
+        /** @var FormRow */
+        $row = self::create('FormRow');
+        return $row;
     }
 }
