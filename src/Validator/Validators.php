@@ -31,13 +31,27 @@ class Validators
         return $validator;
     }
 
-    // public static function minLength(int $length): Validator
-    // {
-    //     return new MinLengthValidator($length);
-    // }
+    public static function length(int $maxLength, string $message = ''): Validator
+    {
+        $validator = new MaxLengthValidator();
+        if ($maxLength) {
+            $validator->maxLength($maxLength);
+        }
+        if ($message) {
+            $validator->message($message);
+        }
+        return $validator;
+    }
 
-    // public static function maxLength(int $length): Validator
-    // {
-    //     return new MaxLengthValidator($length);
-    // }
+    public static function regex(string $pattern, string $message = ''): Validator
+    {
+        $validator = new RegexValidator();
+        if ($pattern) {
+            $validator->pattern($pattern);
+        }
+        if ($message) {
+            $validator->message($message);
+        }
+        return $validator;
+    }
 }
