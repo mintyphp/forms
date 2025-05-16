@@ -32,7 +32,11 @@ class FormSelect implements FormControl
 
     public function value(string $value): self
     {
-        $this->value = $value;
+        if (in_array($value, array_keys($this->options))) {
+            $this->value = $value;
+        } else {
+            $this->value = '';
+        }
         return $this;
     }
 
@@ -51,7 +55,7 @@ class FormSelect implements FormControl
     public function fill(array $data): void
     {
         if (key_exists($this->name, $data)) {
-            $this->value = trim($data[$this->name]);
+            $this->value(trim($data[$this->name]));
         }
     }
 

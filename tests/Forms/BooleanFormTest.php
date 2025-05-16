@@ -104,6 +104,9 @@ class BooleanFormTest extends TestCase
             '</form>',
         ];
         $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $form->fill(['bool' => 'in-between']);
+        $this->assertFalse($form->validate());
+        $this->assertEquals(implode("\n", $lines), $form->__toString());
         $form->fill(['bool' => 'no']);
         $this->assertTrue($form->validate());
         $lines = [
@@ -141,6 +144,9 @@ class BooleanFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
+        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $form->fill(['bool' => 'in-between']);
+        $this->assertFalse($form->validate());
         $this->assertEquals(implode("\n", $lines), $form->__toString());
         $form->fill(['bool' => 'no']);
         $this->assertTrue($form->validate());
