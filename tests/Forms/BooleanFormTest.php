@@ -23,7 +23,7 @@ class BooleanFormTest extends TestCase
                 ->label(E::label('Yes or No?'))
                 ->control(E::select('bool', $booleans))
                 ->validators([
-                    V::required('Username is required'),
+                    V::required('Field cannot be empty'),
                 ]),
         ]);
     }
@@ -34,8 +34,12 @@ class BooleanFormTest extends TestCase
         $lines = [
             '<form method="post">',
             '  <div>',
-            '    <label for="username">Username</label>',
-            '    <input id="username" type="email" name="username" value="" placeholder="Enter your email"/>',
+            '    <label for="bool">Yes or No?</label>',
+            '    <select id="bool" name="bool">',
+            '      <option value="" selected="selected">Select an option</option>',
+            '      <option value="yes">Yes</option>',
+            '      <option value="no">No</option>',
+            '    </select>',
             '  </div>',
             '</form>',
         ];
@@ -48,9 +52,13 @@ class BooleanFormTest extends TestCase
         $lines = [
             '<form method="post">',
             '  <div class="field">',
-            '    <label class="label" for="username">Username</label>',
-            '    <div class="control">',
-            '      <input id="username" class="input" type="email" name="username" value="" placeholder="Enter your email"/>',
+            '    <label class="label" for="bool">Yes or No?</label>',
+            '    <div class="select">',
+            '      <select id="bool" name="bool">',
+            '        <option value="" selected="selected">Select an option</option>',
+            '        <option value="yes">Yes</option>',
+            '        <option value="no">No</option>',
+            '      </select>',
             '    </div>',
             '  </div>',
             '</form>',
@@ -61,12 +69,16 @@ class BooleanFormTest extends TestCase
     public function testFillForm(): void
     {
         $form = $this->createForm('none');
-        $form->fill(['username' => 'some_random_username']);
+        $form->fill(['bool' => 'yes']);
         $lines = [
             '<form method="post">',
             '  <div>',
-            '    <label for="username">Username</label>',
-            '    <input id="username" type="email" name="username" value="some_random_username" placeholder="Enter your email"/>',
+            '    <label for="bool">Yes or No?</label>',
+            '    <select id="bool" name="bool">',
+            '      <option value="">Select an option</option>',
+            '      <option value="yes" selected="selected">Yes</option>',
+            '      <option value="no">No</option>',
+            '    </select>',
             '  </div>',
             '</form>',
         ];
@@ -76,37 +88,33 @@ class BooleanFormTest extends TestCase
     public function testValidators(): void
     {
         $form = $this->createForm('none');
-        $form->fill(['username' => '']);
+        $form->fill(['bool' => '']);
         $this->assertFalse($form->validate());
         $lines = [
             '<form method="post">',
             '  <div class="error">',
-            '    <label for="username">Username</label>',
-            '    <input id="username" type="email" name="username" value="" placeholder="Enter your email"/>',
-            '    <div>Username is required</div>',
+            '    <label for="bool">Yes or No?</label>',
+            '    <select id="bool" name="bool">',
+            '      <option value="" selected="selected">Select an option</option>',
+            '      <option value="yes">Yes</option>',
+            '      <option value="no">No</option>',
+            '    </select>',
+            '    <div>Field cannot be empty</div>',
             '  </div>',
             '</form>',
         ];
         $this->assertEquals(implode("\n", $lines), $form->__toString());
-        $form->fill(['username' => 'some_random_username']);
-        $this->assertFalse($form->validate());
-        $lines = [
-            '<form method="post">',
-            '  <div class="error">',
-            '    <label for="username">Username</label>',
-            '    <input id="username" type="email" name="username" value="some_random_username" placeholder="Enter your email"/>',
-            '    <div>Enter a valid email address</div>',
-            '  </div>',
-            '</form>',
-        ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
-        $form->fill(['username' => 'test@test.com']);
+        $form->fill(['bool' => 'no']);
         $this->assertTrue($form->validate());
         $lines = [
             '<form method="post">',
             '  <div>',
-            '    <label for="username">Username</label>',
-            '    <input id="username" type="email" name="username" value="test@test.com" placeholder="Enter your email"/>',
+            '    <label for="bool">Yes or No?</label>',
+            '    <select id="bool" name="bool">',
+            '      <option value="">Select an option</option>',
+            '      <option value="yes">Yes</option>',
+            '      <option value="no" selected="selected">No</option>',
+            '    </select>',
             '  </div>',
             '</form>',
         ];
@@ -116,42 +124,36 @@ class BooleanFormTest extends TestCase
     public function testValidatorsBulma(): void
     {
         $form = $this->createForm('bulma');
-        $form->fill(['username' => '']);
+        $form->fill(['bool' => '']);
         $this->assertFalse($form->validate());
         $lines = [
             '<form method="post">',
             '  <div class="field">',
-            '    <label class="label" for="username">Username</label>',
-            '    <div class="control">',
-            '      <input id="username" class="input is-danger" type="email" name="username" value="" placeholder="Enter your email"/>',
+            '    <label class="label" for="bool">Yes or No?</label>',
+            '    <div class="select is-danger">',
+            '      <select id="bool" name="bool">',
+            '        <option value="" selected="selected">Select an option</option>',
+            '        <option value="yes">Yes</option>',
+            '        <option value="no">No</option>',
+            '      </select>',
             '    </div>',
-            '    <p class="help is-danger">Username is required</p>',
+            '    <p class="help is-danger">Field cannot be empty</p>',
             '  </div>',
             '</form>',
         ];
         $this->assertEquals(implode("\n", $lines), $form->__toString());
-        $form->fill(['username' => 'some_random_username']);
-        $this->assertFalse($form->validate());
-        $lines = [
-            '<form method="post">',
-            '  <div class="field">',
-            '    <label class="label" for="username">Username</label>',
-            '    <div class="control">',
-            '      <input id="username" class="input is-danger" type="email" name="username" value="some_random_username" placeholder="Enter your email"/>',
-            '    </div>',
-            '    <p class="help is-danger">Enter a valid email address</p>',
-            '  </div>',
-            '</form>',
-        ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
-        $form->fill(['username' => 'test@test.com']);
+        $form->fill(['bool' => 'no']);
         $this->assertTrue($form->validate());
         $lines = [
             '<form method="post">',
             '  <div class="field">',
-            '    <label class="label" for="username">Username</label>',
-            '    <div class="control">',
-            '      <input id="username" class="input" type="email" name="username" value="test@test.com" placeholder="Enter your email"/>',
+            '    <label class="label" for="bool">Yes or No?</label>',
+            '    <div class="select">',
+            '      <select id="bool" name="bool">',
+            '        <option value="">Select an option</option>',
+            '        <option value="yes">Yes</option>',
+            '        <option value="no" selected="selected">No</option>',
+            '      </select>',
             '    </div>',
             '  </div>',
             '</form>',

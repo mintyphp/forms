@@ -65,6 +65,16 @@ class FormSelect implements FormControl
     public function render(\DOMDocument $doc): \DOMElement
     {
         $select = $this->renderElement($doc);
+        $select->setAttribute('name', $this->name);
+        foreach ($this->options as $key => $value) {
+            $option = $doc->createElement('option');
+            $option->setAttribute('value', $key);
+            if ($key === $this->value) {
+                $option->setAttribute('selected', 'selected');
+            }
+            $option->textContent = $value;
+            $select->appendChild($option);
+        }
         return $select;
     }
 }
