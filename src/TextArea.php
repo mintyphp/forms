@@ -71,6 +71,7 @@ class TextArea extends FormInput
         $textarea->setAttribute('name', $this->name);
         $textarea->setAttribute('value', $this->value);
         $textarea->setAttribute('rows', strval($this->rows));
+        $textarea->removeAttribute('value');
         $textarea->textContent = $this->value;
         return $textarea;
     }
