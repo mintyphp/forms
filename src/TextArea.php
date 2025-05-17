@@ -26,12 +26,6 @@ class TextArea extends FormInput
         return $this;
     }
 
-    public function rows(int $rows): self
-    {
-        $this->rows = $rows;
-        return $this;
-    }
-
     public function getName(): string
     {
         return $this->name;
