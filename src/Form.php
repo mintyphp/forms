@@ -162,7 +162,11 @@ class Form
             forward_static_call(['MintyPHP\Session', 'getCsrfInput']);
             $csrfInput = ob_get_clean();
             if ($csrfInput) {
-                $form->appendChild($doc->createTextNode($csrfInput));
+                // add raw xml to the DOM
+                $dom = new \DOMDocument('1.0', 'UTF-8');
+                $dom->loadXML($csrfInput);
+                $importedNode = $doc->importNode($dom->documentElement, true);
+                $form->appendChild($importedNode);
             }
         }
     }

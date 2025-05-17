@@ -86,6 +86,36 @@ class Elements
         return $input;
     }
 
+    public static function number(string $name = '', string $placeholder = ''): FormInput
+    {
+        /** @var FormInput */
+        $input = self::create('FormInput');
+        $input->type('number');
+        if ($name) {
+            $input->name($name);
+        }
+        if ($placeholder) {
+            $input->placeholder($placeholder);
+        }
+        return $input;
+    }
+
+    public static function textarea(string $name = '', int $lines = 0, string $placeholder = ''): TextArea
+    {
+        /** @var TextArea */
+        $textarea = self::create('TextArea');
+        if ($name) {
+            $textarea->name($name);
+        }
+        if ($lines) {
+            $textarea->lines($lines);
+        }
+        if ($placeholder) {
+            $textarea->placeholder($placeholder);
+        }
+        return $textarea;
+    }
+
     public static function checkbox(string $name = '', string $value = 'on'): FormCheckbox
     {
         /** @var FormCheckbox */
