@@ -9,7 +9,7 @@ class TextArea extends FormInput
 {
     use HtmlElement;
 
-    protected int $lines = 8;
+    protected int $rows = 8;
 
     public function __construct()
     {
@@ -28,9 +28,9 @@ class TextArea extends FormInput
         return $this;
     }
 
-    public function lines(int $lines): self
+    public function rows(int $rows): self
     {
-        $this->lines = $lines;
+        $this->rows = $rows;
         return $this;
     }
 
@@ -70,7 +70,7 @@ class TextArea extends FormInput
         $textarea->setAttribute('type', $this->type);
         $textarea->setAttribute('name', $this->name);
         $textarea->setAttribute('value', $this->value);
-        $textarea->setAttribute('lines', strval($this->lines));
+        $textarea->setAttribute('rows', strval($this->rows));
         $textarea->textContent = $this->value;
         return $textarea;
     }
