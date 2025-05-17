@@ -53,11 +53,13 @@ class FormInput implements FormControl
      */
     public function fill(array $data): void
     {
-        $values = $data[$this->name] ?? [];
-        if (!is_array($values)) {
-            $values = [$values];
+        if ($this->name) {
+            $values = $data[$this->name] ?? [];
+            if (!is_array($values)) {
+                $values = [$values];
+            }
+            $this->value = trim($values[0] ?? '');
         }
-        $this->value = trim($values[0] ?? '');
     }
 
     public function validate(Validator $validator): string
@@ -71,7 +73,9 @@ class FormInput implements FormControl
     {
         $input = $this->renderElement($doc);
         $input->setAttribute('type', $this->type);
-        $input->setAttribute('name', $this->name);
+        if ($this->name) {
+            $input->setAttribute('name', $this->name);
+        }
         $input->setAttribute('value', $this->value);
         if ($this->placeholder) {
             $input->setAttribute('placeholder', $this->placeholder);

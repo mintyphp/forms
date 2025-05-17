@@ -100,6 +100,17 @@ class Elements
         return $input;
     }
 
+    public static function submit(string $caption = ''): FormInput
+    {
+        /** @var FormInput */
+        $input = self::create('FormInput');
+        $input->type('submit');
+        if ($caption) {
+            $input->value($caption);
+        }
+        return $input;
+    }
+
     public static function textarea(string $name = '', string $placeholder = ''): TextArea
     {
         /** @var TextArea */

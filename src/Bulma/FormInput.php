@@ -24,6 +24,11 @@ class FormInput extends Base
 
     public function render(\DOMDocument $doc): \DOMElement
     {
+        if ($this->type == 'submit') {
+            $this->removeClass('input');
+            $this->addClass('button');
+            $this->addClass('is-primary');
+        }
         $wrapper = $doc->createElement('div');
         $wrapper->setAttribute('class', 'control');
         $input = parent::render($doc);
