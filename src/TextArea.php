@@ -9,8 +9,6 @@ class TextArea extends FormInput
 {
     use HtmlElement;
 
-    protected int $rows = 8;
-
     public function __construct()
     {
         $this->tag('textarea');
@@ -69,9 +67,6 @@ class TextArea extends FormInput
         $textarea = $this->renderElement($doc);
         $textarea->setAttribute('type', $this->type);
         $textarea->setAttribute('name', $this->name);
-        $textarea->setAttribute('value', $this->value);
-        $textarea->setAttribute('rows', strval($this->rows));
-        $textarea->removeAttribute('value');
         $textarea->textContent = $this->value;
         return $textarea;
     }
