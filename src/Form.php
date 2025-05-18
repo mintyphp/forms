@@ -191,12 +191,12 @@ class Form
         $domDocument = new \DOMDocument('1.0', 'UTF-8');
         $form = $this->renderDom($domDocument);
         $domDocument->appendChild($form);
-        // format the output
-        $domDocument->formatOutput = true;
-        // save the HTML to a string
         if ($asHtml) {
+            // save the HTML to a string
             $str = $domDocument->saveHTML($form);
         } else {
+            // format the output as XML (for testing purposes)
+            $domDocument->formatOutput = true;
             $str = $domDocument->saveXML($form);
         }
         if (!$str) {
