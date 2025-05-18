@@ -31,7 +31,7 @@ class Validators
         return $validator;
     }
 
-    public static function int(string $message = ''): Validator
+    public static function integer(string $message = ''): Validator
     {
         $validator = new IntValidator();
         if ($message) {
@@ -40,12 +40,27 @@ class Validators
         return $validator;
     }
 
+    public static function gt(string $value, string $message = ''): Validator
+    {
+        $validator = new GreaterThanValidator($value);
+        if ($message) {
+            $validator->message($message);
+        }
+        return $validator;
+    }
+
+    public static function gte(string $value, string $message = ''): Validator
+    {
+        $validator = new GreaterEqualsValidator($value);
+        if ($message) {
+            $validator->message($message);
+        }
+        return $validator;
+    }
+
     public static function length(int $maxLength, string $message = ''): Validator
     {
-        $validator = new MaxLengthValidator();
-        if ($maxLength) {
-            $validator->maxLength($maxLength);
-        }
+        $validator = new MaxLengthValidator($maxLength);
         if ($message) {
             $validator->message($message);
         }
@@ -54,10 +69,7 @@ class Validators
 
     public static function regex(string $pattern, string $message = ''): Validator
     {
-        $validator = new RegexValidator();
-        if ($pattern) {
-            $validator->pattern($pattern);
-        }
+        $validator = new RegexValidator($pattern);
         if ($message) {
             $validator->message($message);
         }
