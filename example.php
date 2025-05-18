@@ -50,9 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 <body class="container">
     <h1 class="title">Login</h1>
-    <form method="post">
-        <?php $form->render(); ?>
-    </form>
+    <?php $form->render(); ?>
 </body>
 
 </html>

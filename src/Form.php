@@ -14,7 +14,10 @@ class Form
 
     protected bool $hideFieldsets = false;
 
-    public function __construct() {}
+    public function __construct()
+    {
+        $this->tag('form');
+    }
 
     public function action(string $action): self
     {
@@ -166,7 +169,7 @@ class Form
     public function renderDom(\DOMDocument $doc): \DOMElement
     {
         // Create a new DOMElement for the form
-        $formElement = $doc->createElement('form');
+        $formElement = $this->renderElement($doc);
         if (!empty($this->action)) {
             $formElement->setAttribute('action', $this->action);
         }
@@ -193,35 +196,5 @@ class Form
             }
         }
         return $formElement;
-    }
-
-    public function toString(bool $withRoot = true, bool $asHtml = true): string
-    {
-        // save the DOMElement to a string
-        $domDocument = new \DOMDocument('1.0', 'UTF-8');
-        $form = $this->renderDom($domDocument);
-        $domDocument->appendChild($form);
-        if ($asHtml) {
-            // save the HTML to a string
-            $str = $domDocument->saveHTML($form);
-        } else {
-            // format the output as XML (for testing purposes)
-            $domDocument->formatOutput = true;
-            $str = $domDocument->saveXML($form);
-        }
-        if (!$str) {
-            throw new \RuntimeException('Failed to save XML');
-        }
-        if (!$withRoot) {
-            $str = str_replace("\n  ", "\n", $str);
-            $str = preg_replace('/^<form[^>]*>/', '', $str);
-            $str = preg_replace('/<\/form>$/', '', $str);
-        }
-        return trim($str);
-    }
-
-    public function render(bool $withRoot = false): void
-    {
-        echo $this->toString($withRoot);
     }
 }
