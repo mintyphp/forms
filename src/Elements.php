@@ -154,10 +154,10 @@ class Elements
     /**
      * @param array<string, string> $options
      */
-    public static function select(string $name = '', array $options = []): FormSelect
+    public static function select(string $name = '', array $options = []): Select
     {
-        /** @var FormSelect */
-        $select = self::create('FormSelect');
+        /** @var Select */
+        $select = self::create('Select');
         if ($name) {
             $select->name($name);
         }

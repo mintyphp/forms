@@ -8,15 +8,5 @@ The Form object has the following methods:
 - **addErrors**: Add custom errors (after validation)
 - **render**: Output the form with or without root element
 
-## Tree
 
-A Form element has the following internal tree structure:
-
-- Form
-  - Fieldset
-    - Field
-      - Control (Input/Select/Checkbox/TextArea)
-      - Label
-      - Error
-      - Validators
-
+## 

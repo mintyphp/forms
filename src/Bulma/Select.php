@@ -3,9 +3,9 @@
 namespace MintyPHP\Form\Bulma;
 
 use DOMElement;
-use MintyPHP\Form\FormSelect as Base;
+use MintyPHP\Form\Select as Base;
 
-class FormSelect extends Base
+class Select extends Base
 {
     public function setError(string $message): void
     {
