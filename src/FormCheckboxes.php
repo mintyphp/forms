@@ -47,7 +47,7 @@ class FormCheckboxes implements FormControl
     }
 
     /**
-     * @param array<string, string|string[]> $data
+     * @param array<string, string|string[]|null> $data
      */
     public function fill(array $data): void
     {
@@ -56,6 +56,17 @@ class FormCheckboxes implements FormControl
             $values = [$values];
         }
         $this->values = $values;
+    }
+
+    /**
+     * @return array<string, string|string[]|null>
+     */
+    public function extract(): array
+    {
+        if (!$this->name) {
+            return [];
+        }
+        return [$this->name => $this->values];
     }
 
     public function validate(Validator $validator): string

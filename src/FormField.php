@@ -81,13 +81,25 @@ class FormField
     }
 
     /**
-     * @param array<string, string|string[]> $data
+     * @param array<string, string|string[]|null> $data
      */
     public function fill(array $data): void
     {
         if ($this->control) {
             $this->control->fill($data);
         }
+    }
+
+    /**
+     * @return array<string, string|string[]|null>
+     */
+    public function extract(): array
+    {
+        $data = [];
+        if ($this->control) {
+            $data = $this->control->extract();
+        }
+        return $data;
     }
 
     public function validate(): string

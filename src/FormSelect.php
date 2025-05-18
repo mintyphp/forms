@@ -14,10 +14,17 @@ class FormSelect implements FormControl
     protected array $options = [];
     /** @var string[] $values */
     protected array $values = [];
+    protected bool $multiple = false;
 
     public function __construct()
     {
         $this->tag('select');
+    }
+
+    public function multiple(): self
+    {
+        $this->multiple = true;
+        return $this;
     }
 
     public function name(string $name): self
@@ -47,7 +54,7 @@ class FormSelect implements FormControl
     }
 
     /**
-     * @param array<string, string|string[]> $data
+     * @param array<string, string|string[]|null> $data
      */
     public function fill(array $data): void
     {
@@ -56,6 +63,20 @@ class FormSelect implements FormControl
             $values = [$values];
         }
         $this->values = $values;
+    }
+
+    /**
+     * @return array<string, string|string[]|null>
+     */
+    public function extract(): array
+    {
+        if (!$this->name) {
+            return [];
+        }
+        if (!$this->values) {
+            return [$this->name => null];
+        }
+        return [$this->name => $this->multiple ? $this->values : implode(',', $this->values)];
     }
 
     public function validate(Validator $validator): string
@@ -72,6 +93,9 @@ class FormSelect implements FormControl
     {
         $select = $this->renderElement($doc);
         $select->setAttribute('name', $this->name);
+        if ($this->multiple) {
+            $select->setAttribute('multiple', 'multiple');
+        }
         foreach ($this->options as $key => $value) {
             $option = $doc->createElement('option');
             $option->setAttribute('value', $key);

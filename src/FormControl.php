@@ -12,9 +12,13 @@ interface FormControl
     public function getName(): string;
     public function value(string $value): self;
     /**
-     * @param array<string, string|string[]> $data
+     * @param array<string, string|string[]|null> $data
      */
     public function fill(array $data): void;
+    /**
+     * @return array<string, string|string[]|null>
+     */
+    public function extract(): array;
     public function validate(Validator $validator): string;
     public function setError(string $message): void;
     public function renderDom(\DOMDocument $doc): \DOMElement;

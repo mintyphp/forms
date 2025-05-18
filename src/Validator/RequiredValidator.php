@@ -14,6 +14,6 @@ class RequiredValidator implements Validator
 
     public function validate(string $value): string
     {
-        return empty(trim($value)) ? $this->message : '';
+        return strlen(trim($value)) == 0 ? $this->message : '';
     }
 }

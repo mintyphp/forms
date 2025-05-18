@@ -42,13 +42,38 @@ class FormFieldset
     }
 
     /**
-     * @param array<string, string|string[]> $data
+     * @param array<string, string|string[]|null> $data
      */
     public function fill(array $data): void
     {
         foreach ($this->fields as $field) {
             $field->fill($data);
         }
+    }
+
+    /**
+     * @return array<string, string|string[]|null>
+     */
+    public function extract(): array
+    {
+        $data = [];
+        foreach ($this->fields as $field) {
+            foreach ($field->extract() as $name => $value) {
+                if (isset($data[$name])) {
+                    if (!is_array($data[$name])) {
+                        $data[$name] = [$data[$name]];
+                    }
+                    if (is_array($value)) {
+                        $data[$name] = array_merge($data[$name], $value);
+                    } else {
+                        $data[$name][] = $value;
+                    }
+                } else {
+                    $data[$name] = $value;
+                }
+            }
+        }
+        return $data;
     }
 
     public function validate(): bool

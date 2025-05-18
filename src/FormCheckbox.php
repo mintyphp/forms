@@ -41,7 +41,7 @@ class FormCheckbox extends FormInput
     }
 
     /**
-     * @param array<string, string|string[]> $data
+     * @param array<string, string|string[]|null> $data
      */
     public function fill(array $data): void
     {
