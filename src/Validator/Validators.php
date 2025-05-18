@@ -40,24 +40,6 @@ class Validators
         return $validator;
     }
 
-    public static function gt(string $value, string $message = ''): Validator
-    {
-        $validator = new GreaterThanValidator($value);
-        if ($message) {
-            $validator->message($message);
-        }
-        return $validator;
-    }
-
-    public static function gte(string $value, string $message = ''): Validator
-    {
-        $validator = new GreaterEqualsValidator($value);
-        if ($message) {
-            $validator->message($message);
-        }
-        return $validator;
-    }
-
     public static function expr(string $comperator, string $value, string $message = ''): Validator
     {
         $validator = new ExpressionValidator($comperator, $value);

@@ -4,19 +4,19 @@ namespace MintyPHP\Form\Validator;
 
 class ExpressionValidator implements Validator
 {
-    protected string $comperator;
+    protected string $comparator;
     protected string $value;
-    protected string $message = 'Number must be {comperator} {value}';
+    protected string $message = 'Number must be {comparator} {value}';
 
-    public function __construct(string $comperator, string $value)
+    public function __construct(string $comparator, string $value)
     {
-        if (!in_array($comperator, ['>', '>=', '<', '<='])) {
-            throw new \InvalidArgumentException('Comperator not supported');
+        if (!in_array($comparator, ['>', '>=', '<', '<='])) {
+            throw new \InvalidArgumentException('Comparator not supported');
         }
         if (!is_numeric($value)) {
             throw new \InvalidArgumentException('Value must be numeric');
         }
-        $this->comperator = $comperator;
+        $this->comparator = $comparator;
         $this->value = $value;
     }
 
@@ -26,7 +26,7 @@ class ExpressionValidator implements Validator
             return false;
         }
         //evaluate the expression
-        switch ($this->comperator) {
+        switch ($this->comparator) {
             case '>':
                 return floatval($value) > floatval($this->value);
             case '>=':
@@ -37,12 +37,12 @@ class ExpressionValidator implements Validator
                 return floatval($value) <= floatval($this->value);
         }
         // If we reach here, something went wrong
-        throw new \RuntimeException('Not implemented comperator: ' . $this->comperator);
+        throw new \RuntimeException('Comparator not implemented');
     }
 
     public function message(string $message): self
     {
-        $this->message = str_replace(['{value}', '{comperator}'], [$this->value, $this->comperator], $message);
+        $this->message = str_replace(['{value}', '{comparator}'], [$this->value, $this->comparator], $message);
         return $this;
     }
 
