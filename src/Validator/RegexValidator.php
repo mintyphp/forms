@@ -2,15 +2,22 @@
 
 namespace MintyPHP\Form\Validator;
 
-class RegexValidator implements Validator
+class RegexValidator implements ExpressionValidator
 {
     protected string $pattern = '/.*/';
     protected string $message = 'Invalid format';
 
-    public function pattern(string $pattern): self
+    public function __construct(string $pattern)
     {
+        if (@preg_match($pattern, "") === false) {
+            throw new \InvalidArgumentException("Invalid regex pattern: $pattern");
+        }
         $this->pattern = $pattern;
-        return $this;
+    }
+
+    public function evaluate(string $value): bool
+    {
+        return preg_match($this->pattern, $value) ? true : false;
     }
 
     public function message(string $message): self
@@ -21,6 +28,6 @@ class RegexValidator implements Validator
 
     public function validate(string $value): string
     {
-        return !preg_match($this->pattern, $value) ? $this->message : '';
+        return !$this->evaluate($value) ? $this->message : '';
     }
 }

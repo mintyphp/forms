@@ -58,7 +58,7 @@ class Validators
         return $validator;
     }
 
-    public static function length(int $maxLength, string $message = ''): Validator
+    public static function length(string $maxLength, string $message = ''): Validator
     {
         $validator = new MaxLengthValidator($maxLength);
         if ($message) {
