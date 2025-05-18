@@ -156,10 +156,10 @@ class Form
     /**
      * @param array<string, string> $messages
      */
-    public function setErrors(array $messages): void
+    public function addErrors(array $messages): void
     {
         foreach ($this->fieldsets as $fieldset) {
-            $fieldset->setErrors($messages);
+            $fieldset->addErrors($messages);
         }
     }
 

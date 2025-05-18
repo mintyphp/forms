@@ -102,46 +102,67 @@ And the output will be form in the familiar Bulma style:
 
 In the future we will add support for other frameworks, such as bootstrap 5.
 
-## Full Example
+## Full example
 
-Copy and paste the following code into a new .php document and see just how fast and easy MintyPHP Forms really is.
+Although we don't encourage you to use MintyPHP Forms without a framework, it is certainly possible:
 
-A Full Contact Form using Bulma
-
+```php
 <?php
+
+use MintyPHP\Form\Elements as E;
+use MintyPHP\Form\Validator\Validators as V;
+
 // include MintyPHP Forms
 require_once 'vendor/autoload.php';
 
-// alias the classes
-
 // set style to Bulma
+E::$style = 'bulma';
 
 // create a form object
-$form = new MintyPHP Forms\MintyPHP Forms;
-
-// make all fields required
-$form->required = '*';
+$form = E::form([
+    E::field(E::text('username'), E::label('Username'), [V::required('Username is required')]),
+    E::field(E::password('password'), E::label('Password')),
+    E::field(E::submit('Login')),
+]);
 
 // check if the form has been submitted
-if ($form->submitted())
-{
-    // get our form values and assign them to a variable
-    $data = $form->validate('Name, Email, Comments');
-
-    // show a success message if no errors
-    if($form->ok()) {
-        $form->success_message = "Thank you, {$data['name']}!";
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // fill the form with the submitted data
+    $form->fill($_POST);
+    // if the form is valid, process the data
+    if ($form->validate()) {
+        // extract the data
+        $data = $form->extract();
+        // process the data (e.g., login, save to database, etc.)
+        if ($data['username'] == 'user' && $data['password'] == 'pass') {
+            // redirect to the dashboard page
+            die('logged in, redirecting to dashboard...');
+        } else {
+            // invalidate credentials
+            $form->addErrors([
+                'username' => 'Invalid username/password combination',
+                'password' => 'Invalid username/password combination',
+            ]);
+        }
     }
+} else {
+    // if the form is not submitted, fill it with empty values
+    $form->fill(['username' => '', 'password' => '']);
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
-<body class="container">
-    <?php $form->messages(); ?>
-    <?php $form->create_form('Name, Email, Comments|textarea'); ?>
-</body>
-</html>
 
-Next Methods
-Made with Material for MkDocs
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.3/css/bulma.min.css">
+</head>
+
+<body class="container">
+    <h1 class="title">Login</h1>
+    <form method="post">
+        <?php $form->render(); ?>
+    </form>
+</body>
+
+</html>
+```

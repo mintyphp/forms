@@ -92,7 +92,7 @@ class FormFieldset
     /**
      * @param array<string, string> $messages
      */
-    public function setErrors(array $messages): void
+    public function addErrors(array $messages): void
     {
         foreach ($this->fields as $field) {
             $name = $field->getControl()->getName();
