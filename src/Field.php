@@ -5,12 +5,12 @@ namespace MintyPHP\Form;
 use DOMElement;
 use MintyPHP\Form\Validator\Validator;
 
-class FormField
+class Field
 {
     use HtmlElement;
 
     protected ?Label $label = null;
-    protected ?FormControl $control = null;
+    protected ?Control $control = null;
     protected ?Error $error = null;
     /** @var Validator[] */
     protected array $validators = [];
@@ -57,13 +57,13 @@ class FormField
         return $this;
     }
 
-    public function control(FormControl $control): self
+    public function control(Control $control): self
     {
         $this->control = $control;
         return $this;
     }
 
-    public function getControl(): ?FormControl
+    public function getControl(): ?Control
     {
         return $this->control;
     }

@@ -4,7 +4,7 @@ namespace MintyPHP\Form;
 
 use DOMElement;
 
-class FormHeader
+class Header
 {
     use HtmlElement;
 

@@ -5,7 +5,7 @@ namespace MintyPHP\Form;
 use DOMElement;
 use MintyPHP\Form\Validator\Validator;
 
-class Input implements FormControl
+class Input implements Control
 {
     use HtmlElement;
 

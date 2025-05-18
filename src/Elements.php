@@ -14,7 +14,7 @@ class Elements
     ];
 
     /**
-     * @param FormField[] $fields
+     * @param Field[] $fields
      */
     public static function form(array $fields = []): Form
     {
@@ -29,10 +29,10 @@ class Elements
     /**
      * @param Validator[] $validators
      */
-    public static function field(?FormControl $control = null, ?Label $label = null, array $validators = []): FormField
+    public static function field(?Control $control = null, ?Label $label = null, array $validators = []): Field
     {
-        /** @var FormField */
-        $field = self::create('FormField');
+        /** @var Field */
+        $field = self::create('Field');
         if ($control) {
             $field->control($control);
         }
@@ -193,17 +193,17 @@ class Elements
         return $label;
     }
 
-    public static function header(): FormHeader
+    public static function header(): Header
     {
-        /** @var FormHeader */
-        $header = self::create('FormHeader');
+        /** @var Header */
+        $header = self::create('Header');
         return $header;
     }
 
-    public static function legend(): FormLegend
+    public static function legend(): Legend
     {
-        /** @var FormLegend */
-        $legend = self::create('FormLegend');
+        /** @var Legend */
+        $legend = self::create('Legend');
         return $legend;
     }
 

@@ -4,7 +4,7 @@ namespace MintyPHP\Form;
 
 use MintyPHP\Form\Validator\Validator;
 
-interface FormControl
+interface Control
 {
     public function id(string $id): self;
     public function getId(): string;

@@ -9,23 +9,24 @@ class Fieldset
 {
     use HtmlElement;
 
-    /** @var FormField[] */
+    /** @var Field[] */
     protected array $fields = [];
-    protected ?FormHeader $header = null;
+    protected ?Legend $legend = null;
+    protected ?Header $header = null;
 
     public function __construct()
     {
         $this->tag('div');
     }
 
-    public function field(FormField $field): self
+    public function field(Field $field): self
     {
         $this->fields[] = $field;
         return $this;
     }
 
     /**
-     * @param FormField[] $fields
+     * @param Field[] $fields
      */
     public function fields(array $fields): self
     {
@@ -35,7 +36,13 @@ class Fieldset
         return $this;
     }
 
-    public function header(FormHeader $header): self
+    public function legend(Legend $legend): self
+    {
+        $this->legend = $legend;
+        return $this;
+    }
+
+    public function header(Header $header): self
     {
         $this->header = $header;
         return $this;
@@ -107,6 +114,10 @@ class Fieldset
     public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $fieldset = $this->renderElement($doc);
+        if ($this->legend) {
+            $legendElement = $this->legend->renderDom($doc);
+            $fieldset->appendChild($legendElement);
+        }
         if ($this->header) {
             $headerElement = $this->header->renderDom($doc);
             $fieldset->appendChild($headerElement);

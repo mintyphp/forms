@@ -4,7 +4,7 @@ namespace MintyPHP\Form;
 
 use DOMElement;
 
-class FormLegend
+class Legend
 {
     use HtmlElement;
 

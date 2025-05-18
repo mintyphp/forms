@@ -4,9 +4,9 @@ namespace MintyPHP\Form\Bulma;
 
 use MintyPHP\Form\Checkbox;
 use MintyPHP\Form\Checkboxes;
-use MintyPHP\Form\FormField as Base;
+use MintyPHP\Form\Field as Base;
 
-class FormField extends Base
+class Field extends Base
 {
     public function __construct()
     {

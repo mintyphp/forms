@@ -85,7 +85,7 @@ class Form
         return $this;
     }
 
-    public function field(FormField $field): self
+    public function field(Field $field): self
     {
         $this->hideFieldsets = true;
         $fieldset = new Fieldset();
@@ -95,7 +95,7 @@ class Form
     }
 
     /**
-     * @param FormField[] $fields
+     * @param Field[] $fields
      */
     public function fields(array $fields): self
     {
