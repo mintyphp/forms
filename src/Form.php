@@ -9,7 +9,7 @@ class Form
     protected string $action = '';
     protected string $method = 'POST';
     protected string $enctype = 'application/x-www-form-urlencoded';
-    /** @var FormFieldset[] */
+    /** @var Fieldset[] */
     protected array $fieldsets = [];
 
     protected bool $hideFieldsets = false;
@@ -68,14 +68,14 @@ class Form
         return $this;
     }
 
-    public function fieldset(FormFieldset $fieldset): self
+    public function fieldset(Fieldset $fieldset): self
     {
         $this->fieldsets[] = $fieldset;
         return $this;
     }
 
     /**
-     * @param FormFieldset[] $fieldsets
+     * @param Fieldset[] $fieldsets
      */
     public function fieldsets(array $fieldsets): self
     {
@@ -88,7 +88,7 @@ class Form
     public function field(FormField $field): self
     {
         $this->hideFieldsets = true;
-        $fieldset = new FormFieldset();
+        $fieldset = new Fieldset();
         $fieldset->field($field);
         $this->fieldset($fieldset);
         return $this;

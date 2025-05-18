@@ -5,7 +5,7 @@ namespace MintyPHP\Form;
 use MintyPHP\Form\HtmlElement;
 use DOMElement;
 
-class FormFieldset
+class Fieldset
 {
     use HtmlElement;
 

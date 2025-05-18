@@ -2,9 +2,9 @@
 
 namespace MintyPHP\Form\Bulma;
 
-use MintyPHP\Form\FormError as Base;
+use MintyPHP\Form\Error as Base;
 
-class FormError extends Base
+class Error extends Base
 {
     public function __construct()
     {

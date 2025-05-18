@@ -138,10 +138,10 @@ class Elements
         return $textarea;
     }
 
-    public static function checkbox(string $name = '', string $value = 'on'): FormCheckbox
+    public static function checkbox(string $name = '', string $value = 'on'): Checkbox
     {
-        /** @var FormCheckbox */
-        $input = self::create('FormCheckbox');
+        /** @var Checkbox */
+        $input = self::create('Checkbox');
         if ($name) {
             $input->name($name);
         }
@@ -170,10 +170,10 @@ class Elements
     /**
      * @param array<string, string> $options
      */
-    public static function checkboxes(string $name = '', array $options = []): FormCheckboxes
+    public static function checkboxes(string $name = '', array $options = []): Checkboxes
     {
-        /** @var FormCheckboxes */
-        $checkboxes = self::create('FormCheckboxes');
+        /** @var Checkboxes */
+        $checkboxes = self::create('Checkboxes');
         if ($name) {
             $checkboxes->name($name);
         }
@@ -207,17 +207,17 @@ class Elements
         return $legend;
     }
 
-    public static function error(): FormError
+    public static function error(): Error
     {
-        /** @var FormError */
-        $error = self::create('FormError');
+        /** @var Error */
+        $error = self::create('Error');
         return $error;
     }
 
-    public static function fieldset(): FormFieldset
+    public static function fieldset(): Fieldset
     {
-        /** @var FormFieldset */
-        $fieldset = self::create('FormFieldset');
+        /** @var Fieldset */
+        $fieldset = self::create('Fieldset');
         return $fieldset;
     }
 }

@@ -5,7 +5,7 @@ namespace MintyPHP\Form;
 use DOMElement;
 use MintyPHP\Form\Validator\Validator;
 
-class FormCheckboxes implements FormControl
+class Checkboxes implements FormControl
 {
     use HtmlElement;
 

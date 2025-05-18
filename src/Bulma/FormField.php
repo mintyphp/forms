@@ -2,8 +2,8 @@
 
 namespace MintyPHP\Form\Bulma;
 
-use MintyPHP\Form\FormCheckbox;
-use MintyPHP\Form\FormCheckboxes;
+use MintyPHP\Form\Checkbox;
+use MintyPHP\Form\Checkboxes;
 use MintyPHP\Form\FormField as Base;
 
 class FormField extends Base
@@ -22,7 +22,7 @@ class FormField extends Base
 
     public function renderDom(\DOMDocument $doc): \DOMElement
     {
-        if ($this->control instanceof FormCheckbox && $this->label) {
+        if ($this->control instanceof Checkbox && $this->label) {
             $this->label->removeClass('label');
             $this->label->addClass('checkbox');
             $control = $this->control->renderDom($doc);
@@ -38,7 +38,7 @@ class FormField extends Base
             }
             return $field;
         }
-        if ($this->control instanceof FormCheckboxes && $this->label) {
+        if ($this->control instanceof Checkboxes && $this->label) {
             $field = $this->renderElement($doc);
             $field->appendChild($this->label->renderDom($doc));
             $field->appendChild($this->control->renderDom($doc));

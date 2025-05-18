@@ -3,9 +3,9 @@
 namespace MintyPHP\Form\Bulma;
 
 use DOMElement;
-use MintyPHP\Form\FormCheckboxes as Base;
+use MintyPHP\Form\Checkboxes as Base;
 
-class FormCheckboxes extends Base
+class Checkboxes extends Base
 {
     public function __construct()
     {

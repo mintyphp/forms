@@ -11,7 +11,7 @@ class FormField
 
     protected ?Label $label = null;
     protected ?FormControl $control = null;
-    protected ?FormError $error = null;
+    protected ?Error $error = null;
     /** @var Validator[] */
     protected array $validators = [];
 
@@ -79,7 +79,7 @@ class FormField
         return $this;
     }
 
-    public function error(FormError $error): self
+    public function error(Error $error): self
     {
         $this->error = $error;
         return $this;
@@ -136,8 +136,8 @@ class FormField
         }
         if ($message) {
             if (!$this->error) {
-                /** @var FormError */
-                $error = Elements::create('FormError');
+                /** @var Error */
+                $error = Elements::create('Error');
                 $this->error = $error;
             }
         } else if ($this->hideError) {

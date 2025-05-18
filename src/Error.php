@@ -4,7 +4,7 @@ namespace MintyPHP\Form;
 
 use DOMElement;
 
-class FormError
+class Error
 {
     use HtmlElement;
 
