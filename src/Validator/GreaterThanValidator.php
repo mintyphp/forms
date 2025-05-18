@@ -2,9 +2,9 @@
 
 namespace MintyPHP\Form\Validator;
 
-class GreaterThanValidator implements ExpressionValidator
+class GreaterThanValidator implements Validator
 {
-    protected string $value = '0';
+    protected string $value;
     protected string $message = 'Number must be greater than {value}';
 
     public function __construct(string $value)

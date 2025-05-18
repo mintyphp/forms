@@ -2,9 +2,9 @@
 
 namespace MintyPHP\Form\Validator;
 
-class RegexValidator implements ExpressionValidator
+class RegexValidator implements Validator
 {
-    protected string $pattern = '/.*/';
+    protected string $pattern;
     protected string $message = 'Invalid format';
 
     public function __construct(string $pattern)

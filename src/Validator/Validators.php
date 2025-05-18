@@ -58,6 +58,15 @@ class Validators
         return $validator;
     }
 
+    public static function expr(string $comperator, string $value, string $message = ''): Validator
+    {
+        $validator = new ExpressionValidator($comperator, $value);
+        if ($message) {
+            $validator->message($message);
+        }
+        return $validator;
+    }
+
     public static function length(string $maxLength, string $message = ''): Validator
     {
         $validator = new MaxLengthValidator($maxLength);
