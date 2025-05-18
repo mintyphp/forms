@@ -29,15 +29,15 @@ class Elements
     /**
      * @param Validator[] $validators
      */
-    public static function field(?FormLabel $label = null, ?FormControl $control = null, array $validators = []): FormField
+    public static function field(?FormControl $control = null, ?FormLabel $label = null, array $validators = []): FormField
     {
         /** @var FormField */
         $field = self::create('FormField');
-        if ($label) {
-            $field->label($label);
-        }
         if ($control) {
             $field->control($control);
+        }
+        if ($label) {
+            $field->label($label);
         }
         if ($validators) {
             $field->validators($validators);

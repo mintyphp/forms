@@ -164,11 +164,6 @@ class Form
         // save the DOMElement to a string
         $domDocument = new \DOMDocument('1.0', 'UTF-8');
         $form = $this->renderDom($domDocument);
-        if (!$withRoot) {
-            foreach ($form->childNodes as $child) {
-                $domDocument->appendChild($child);
-            }
-        }
         $domDocument->appendChild($form);
         // format the output
         $domDocument->formatOutput = true;
@@ -178,7 +173,12 @@ class Form
         if (!$str) {
             throw new \RuntimeException('Failed to save XML');
         }
-        return trim(preg_replace('/<\?xml.*?\?>/', '', $str));
+        $str = trim(preg_replace('/<\?xml.*?\?>/', '', $str));
+        if (!$withRoot) {
+            $str = trim(preg_replace('/^<form[^>]*>/', '', $str));
+            $str = trim(preg_replace('/<\/form>$/', '', $str));
+        }
+        return trim($str);
     }
 
     public function render(bool $withRoot = false): void

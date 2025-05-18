@@ -14,7 +14,7 @@ class UsernameFormTest extends TestCase
     {
         E::$style = $style;
         return E::form([
-            E::field(E::label('Username'), E::email('username', 'Enter your email'), [V::required('Username is required'), V::email('Enter a valid email address')]),
+            E::field(E::email('username', 'Enter your email'), E::label('Username'), [V::required('Username is required'), V::email('Enter a valid email address')]),
         ]);
     }
 

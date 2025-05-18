@@ -19,7 +19,7 @@ class BooleanFormTest extends TestCase
         ];
         E::$style = $style;
         return E::form([
-            E::field(E::label('Yes or No?'), E::select('bool', $booleans), [V::required('Field cannot be empty')]),
+            E::field(E::select('bool', $booleans), E::label('Yes or No?'), [V::required('Field cannot be empty')]),
         ]);
     }
 

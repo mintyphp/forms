@@ -14,7 +14,7 @@ class ConfirmFormTest extends TestCase
     {
         E::$style = $style;
         return E::form([
-            E::field(E::label('I agree to the terms and conditions'), E::checkbox('confirm'), [V::required('Field must be checked')]),
+            E::field(E::checkbox('confirm'), E::label('I agree to the terms and conditions'), [V::required('Field must be checked')]),
         ]);
     }
 
