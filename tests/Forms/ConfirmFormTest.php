@@ -22,27 +22,23 @@ class ConfirmFormTest extends TestCase
     {
         $form = $this->createForm('none');
         $lines = [
-            '<form method="post">',
-            '  <div>',
-            '    <label for="confirm">I agree to the terms and conditions</label>',
-            '    <input id="confirm" type="checkbox" name="confirm" value="on"/>',
-            '  </div>',
-            '</form>',
+            '<div>',
+            '  <label for="confirm">I agree to the terms and conditions</label>',
+            '  <input id="confirm" type="checkbox" name="confirm" value="on"/>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 
     public function testRenderBulma(): void
     {
         $form = $this->createForm('bulma');
         $lines = [
-            '<form method="post">',
-            '  <div class="field">',
-            '    <label class="checkbox"><input type="checkbox" name="confirm" value="on"/>I agree to the terms and conditions</label>',
-            '  </div>',
-            '</form>',
+            '<div class="field">',
+            '  <label class="checkbox"><input type="checkbox" name="confirm" value="on"/>I agree to the terms and conditions</label>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 
     public function testFillForm(): void
@@ -50,28 +46,24 @@ class ConfirmFormTest extends TestCase
         $form = $this->createForm('none');
         $form->fill(['confirm' => 'on']);
         $lines = [
-            '<form method="post">',
-            '  <div>',
-            '    <label for="confirm">I agree to the terms and conditions</label>',
-            '    <input id="confirm" type="checkbox" name="confirm" value="on" checked="checked"/>',
-            '  </div>',
-            '</form>',
+            '<div>',
+            '  <label for="confirm">I agree to the terms and conditions</label>',
+            '  <input id="confirm" type="checkbox" name="confirm" value="on" checked="checked"/>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['confirm' => '']);
         $lines = [
-            '<form method="post">',
-            '  <div>',
-            '    <label for="confirm">I agree to the terms and conditions</label>',
-            '    <input id="confirm" type="checkbox" name="confirm" value="on"/>',
-            '  </div>',
-            '</form>',
+            '<div>',
+            '  <label for="confirm">I agree to the terms and conditions</label>',
+            '  <input id="confirm" type="checkbox" name="confirm" value="on"/>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['confirm' => 'off']);
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill([]);
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 
     public function testValidators(): void
@@ -80,29 +72,25 @@ class ConfirmFormTest extends TestCase
         $form->fill(['confirm' => '']);
         $this->assertFalse($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div class="error">',
-            '    <label for="confirm">I agree to the terms and conditions</label>',
-            '    <input id="confirm" type="checkbox" name="confirm" value="on"/>',
-            '    <div>Field must be checked</div>',
-            '  </div>',
-            '</form>',
+            '<div class="error">',
+            '  <label for="confirm">I agree to the terms and conditions</label>',
+            '  <input id="confirm" type="checkbox" name="confirm" value="on"/>',
+            '  <div>Field must be checked</div>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['confirm' => 'in-between']);
         $this->assertFalse($form->validate());
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['confirm' => 'on']);
         $this->assertTrue($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div>',
-            '    <label for="confirm">I agree to the terms and conditions</label>',
-            '    <input id="confirm" type="checkbox" name="confirm" value="on" checked="checked"/>',
-            '  </div>',
-            '</form>',
+            '<div>',
+            '  <label for="confirm">I agree to the terms and conditions</label>',
+            '  <input id="confirm" type="checkbox" name="confirm" value="on" checked="checked"/>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 
     public function testValidatorsBulma(): void
@@ -111,26 +99,22 @@ class ConfirmFormTest extends TestCase
         $form->fill(['bool' => '']);
         $this->assertFalse($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div class="field">',
-            '    <label class="checkbox"><input type="checkbox" name="confirm" value="on"/>I agree to the terms and conditions</label>',
-            '    <p class="help is-danger">Field must be checked</p>',
-            '  </div>',
-            '</form>',
+            '<div class="field">',
+            '  <label class="checkbox"><input type="checkbox" name="confirm" value="on"/>I agree to the terms and conditions</label>',
+            '  <p class="help is-danger">Field must be checked</p>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['confirm' => 'in-between']);
         $this->assertFalse($form->validate());
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['confirm' => 'on']);
         $this->assertTrue($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div class="field">',
-            '    <label class="checkbox"><input type="checkbox" name="confirm" value="on" checked="checked"/>I agree to the terms and conditions</label>',
-            '  </div>',
-            '</form>',
+            '<div class="field">',
+            '  <label class="checkbox"><input type="checkbox" name="confirm" value="on" checked="checked"/>I agree to the terms and conditions</label>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 }

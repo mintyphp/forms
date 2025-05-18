@@ -185,7 +185,7 @@ class Form
         return $formElement;
     }
 
-    public function toString(bool $withRoot = true): string
+    public function toString(bool $withRoot = true, bool $asHtml = true): string
     {
         // save the DOMElement to a string
         $domDocument = new \DOMDocument('1.0', 'UTF-8');
@@ -193,16 +193,19 @@ class Form
         $domDocument->appendChild($form);
         // format the output
         $domDocument->formatOutput = true;
-        $domDocument->preserveWhiteSpace = false;
-        // remove the XML declaration
-        $str = $domDocument->saveXML();
+        // save the HTML to a string
+        if ($asHtml) {
+            $str = $domDocument->saveHTML($form);
+        } else {
+            $str = $domDocument->saveXML($form);
+        }
         if (!$str) {
             throw new \RuntimeException('Failed to save XML');
         }
-        $str = trim(preg_replace('/<\?xml.*?\?>/', '', $str));
         if (!$withRoot) {
-            $str = trim(preg_replace('/^<form[^>]*>/', '', $str));
-            $str = trim(preg_replace('/<\/form>$/', '', $str));
+            $str = str_replace("\n  ", "\n", $str);
+            $str = preg_replace('/^<form[^>]*>/', '', $str);
+            $str = preg_replace('/<\/form>$/', '', $str);
         }
         return trim($str);
     }

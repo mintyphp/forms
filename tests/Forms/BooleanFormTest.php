@@ -27,38 +27,34 @@ class BooleanFormTest extends TestCase
     {
         $form = $this->createForm('none');
         $lines = [
-            '<form method="post">',
-            '  <div>',
-            '    <label for="bool">Yes or No?</label>',
-            '    <select id="bool" name="bool">',
-            '      <option value="">Select an option</option>',
-            '      <option value="yes">Yes</option>',
-            '      <option value="no">No</option>',
-            '    </select>',
-            '  </div>',
-            '</form>',
+            '<div>',
+            '  <label for="bool">Yes or No?</label>',
+            '  <select id="bool" name="bool">',
+            '    <option value="">Select an option</option>',
+            '    <option value="yes">Yes</option>',
+            '    <option value="no">No</option>',
+            '  </select>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 
     public function testRenderBulma(): void
     {
         $form = $this->createForm('bulma');
         $lines = [
-            '<form method="post">',
-            '  <div class="field">',
-            '    <label class="label" for="bool">Yes or No?</label>',
-            '    <div class="select">',
-            '      <select id="bool" name="bool">',
-            '        <option value="">Select an option</option>',
-            '        <option value="yes">Yes</option>',
-            '        <option value="no">No</option>',
-            '      </select>',
-            '    </div>',
+            '<div class="field">',
+            '  <label class="label" for="bool">Yes or No?</label>',
+            '  <div class="select">',
+            '    <select id="bool" name="bool">',
+            '      <option value="">Select an option</option>',
+            '      <option value="yes">Yes</option>',
+            '      <option value="no">No</option>',
+            '    </select>',
             '  </div>',
-            '</form>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 
     public function testFillForm(): void
@@ -66,18 +62,16 @@ class BooleanFormTest extends TestCase
         $form = $this->createForm('none');
         $form->fill(['bool' => 'yes']);
         $lines = [
-            '<form method="post">',
-            '  <div>',
-            '    <label for="bool">Yes or No?</label>',
-            '    <select id="bool" name="bool">',
-            '      <option value="">Select an option</option>',
-            '      <option value="yes" selected="selected">Yes</option>',
-            '      <option value="no">No</option>',
-            '    </select>',
-            '  </div>',
-            '</form>',
+            '<div>',
+            '  <label for="bool">Yes or No?</label>',
+            '  <select id="bool" name="bool">',
+            '    <option value="">Select an option</option>',
+            '    <option value="yes" selected="selected">Yes</option>',
+            '    <option value="no">No</option>',
+            '  </select>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 
     public function testValidators(): void
@@ -86,50 +80,44 @@ class BooleanFormTest extends TestCase
         $form->fill(['bool' => '']);
         $this->assertFalse($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div class="error">',
-            '    <label for="bool">Yes or No?</label>',
-            '    <select id="bool" name="bool">',
-            '      <option value="" selected="selected">Select an option</option>',
-            '      <option value="yes">Yes</option>',
-            '      <option value="no">No</option>',
-            '    </select>',
-            '    <div>Field cannot be empty</div>',
-            '  </div>',
-            '</form>',
+            '<div class="error">',
+            '  <label for="bool">Yes or No?</label>',
+            '  <select id="bool" name="bool">',
+            '    <option value="" selected="selected">Select an option</option>',
+            '    <option value="yes">Yes</option>',
+            '    <option value="no">No</option>',
+            '  </select>',
+            '  <div>Field cannot be empty</div>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['bool' => 'in-between']);
         $this->assertFalse($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div class="error">',
-            '    <label for="bool">Yes or No?</label>',
-            '    <select id="bool" name="bool">',
-            '      <option value="">Select an option</option>',
-            '      <option value="yes">Yes</option>',
-            '      <option value="no">No</option>',
-            '    </select>',
-            '    <div>Invalid option value</div>',
-            '  </div>',
-            '</form>',
+            '<div class="error">',
+            '  <label for="bool">Yes or No?</label>',
+            '  <select id="bool" name="bool">',
+            '    <option value="">Select an option</option>',
+            '    <option value="yes">Yes</option>',
+            '    <option value="no">No</option>',
+            '  </select>',
+            '  <div>Invalid option value</div>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['bool' => 'no']);
         $this->assertTrue($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div>',
-            '    <label for="bool">Yes or No?</label>',
-            '    <select id="bool" name="bool">',
-            '      <option value="">Select an option</option>',
-            '      <option value="yes">Yes</option>',
-            '      <option value="no" selected="selected">No</option>',
-            '    </select>',
-            '  </div>',
-            '</form>',
+            '<div>',
+            '  <label for="bool">Yes or No?</label>',
+            '  <select id="bool" name="bool">',
+            '    <option value="">Select an option</option>',
+            '    <option value="yes">Yes</option>',
+            '    <option value="no" selected="selected">No</option>',
+            '  </select>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 
     public function testValidatorsBulma(): void
@@ -138,55 +126,49 @@ class BooleanFormTest extends TestCase
         $form->fill(['bool' => '']);
         $this->assertFalse($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div class="field">',
-            '    <label class="label" for="bool">Yes or No?</label>',
-            '    <div class="select is-danger">',
-            '      <select id="bool" name="bool">',
-            '        <option value="" selected="selected">Select an option</option>',
-            '        <option value="yes">Yes</option>',
-            '        <option value="no">No</option>',
-            '      </select>',
-            '    </div>',
-            '    <p class="help is-danger">Field cannot be empty</p>',
+            '<div class="field">',
+            '  <label class="label" for="bool">Yes or No?</label>',
+            '  <div class="select is-danger">',
+            '    <select id="bool" name="bool">',
+            '      <option value="" selected="selected">Select an option</option>',
+            '      <option value="yes">Yes</option>',
+            '      <option value="no">No</option>',
+            '    </select>',
             '  </div>',
-            '</form>',
+            '  <p class="help is-danger">Field cannot be empty</p>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['bool' => 'in-between']);
         $this->assertFalse($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div class="field">',
-            '    <label class="label" for="bool">Yes or No?</label>',
-            '    <div class="select is-danger">',
-            '      <select id="bool" name="bool">',
-            '        <option value="">Select an option</option>',
-            '        <option value="yes">Yes</option>',
-            '        <option value="no">No</option>',
-            '      </select>',
-            '    </div>',
-            '    <p class="help is-danger">Invalid option value</p>',
+            '<div class="field">',
+            '  <label class="label" for="bool">Yes or No?</label>',
+            '  <div class="select is-danger">',
+            '    <select id="bool" name="bool">',
+            '      <option value="">Select an option</option>',
+            '      <option value="yes">Yes</option>',
+            '      <option value="no">No</option>',
+            '    </select>',
             '  </div>',
-            '</form>',
+            '  <p class="help is-danger">Invalid option value</p>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['bool' => 'no']);
         $this->assertTrue($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div class="field">',
-            '    <label class="label" for="bool">Yes or No?</label>',
-            '    <div class="select">',
-            '      <select id="bool" name="bool">',
-            '        <option value="">Select an option</option>',
-            '        <option value="yes">Yes</option>',
-            '        <option value="no" selected="selected">No</option>',
-            '      </select>',
-            '    </div>',
+            '<div class="field">',
+            '  <label class="label" for="bool">Yes or No?</label>',
+            '  <div class="select">',
+            '    <select id="bool" name="bool">',
+            '      <option value="">Select an option</option>',
+            '      <option value="yes">Yes</option>',
+            '      <option value="no" selected="selected">No</option>',
+            '    </select>',
             '  </div>',
-            '</form>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 }

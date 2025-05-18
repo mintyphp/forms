@@ -22,30 +22,26 @@ class UsernameFormTest extends TestCase
     {
         $form = $this->createForm('none');
         $lines = [
-            '<form method="post">',
-            '  <div>',
-            '    <label for="username">Username</label>',
-            '    <input id="username" type="email" name="username" value="" placeholder="Enter your email"/>',
-            '  </div>',
-            '</form>',
+            '<div>',
+            '  <label for="username">Username</label>',
+            '  <input id="username" type="email" name="username" value="" placeholder="Enter your email"/>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 
     public function testRenderBulma(): void
     {
         $form = $this->createForm('bulma');
         $lines = [
-            '<form method="post">',
-            '  <div class="field">',
-            '    <label class="label" for="username">Username</label>',
-            '    <div class="control">',
-            '      <input id="username" class="input" type="email" name="username" value="" placeholder="Enter your email"/>',
-            '    </div>',
+            '<div class="field">',
+            '  <label class="label" for="username">Username</label>',
+            '  <div class="control">',
+            '    <input id="username" class="input" type="email" name="username" value="" placeholder="Enter your email"/>',
             '  </div>',
-            '</form>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 
     public function testFillForm(): void
@@ -53,14 +49,12 @@ class UsernameFormTest extends TestCase
         $form = $this->createForm('none');
         $form->fill(['username' => 'some_random_username']);
         $lines = [
-            '<form method="post">',
-            '  <div>',
-            '    <label for="username">Username</label>',
-            '    <input id="username" type="email" name="username" value="some_random_username" placeholder="Enter your email"/>',
-            '  </div>',
-            '</form>',
+            '<div>',
+            '  <label for="username">Username</label>',
+            '  <input id="username" type="email" name="username" value="some_random_username" placeholder="Enter your email"/>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 
     public function testValidators(): void
@@ -69,38 +63,32 @@ class UsernameFormTest extends TestCase
         $form->fill(['username' => '']);
         $this->assertFalse($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div class="error">',
-            '    <label for="username">Username</label>',
-            '    <input id="username" type="email" name="username" value="" placeholder="Enter your email"/>',
-            '    <div>Username is required</div>',
-            '  </div>',
-            '</form>',
+            '<div class="error">',
+            '  <label for="username">Username</label>',
+            '  <input id="username" type="email" name="username" value="" placeholder="Enter your email"/>',
+            '  <div>Username is required</div>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['username' => 'some_random_username']);
         $this->assertFalse($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div class="error">',
-            '    <label for="username">Username</label>',
-            '    <input id="username" type="email" name="username" value="some_random_username" placeholder="Enter your email"/>',
-            '    <div>Enter a valid email address</div>',
-            '  </div>',
-            '</form>',
+            '<div class="error">',
+            '  <label for="username">Username</label>',
+            '  <input id="username" type="email" name="username" value="some_random_username" placeholder="Enter your email"/>',
+            '  <div>Enter a valid email address</div>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['username' => 'test@test.com']);
         $this->assertTrue($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div>',
-            '    <label for="username">Username</label>',
-            '    <input id="username" type="email" name="username" value="test@test.com" placeholder="Enter your email"/>',
-            '  </div>',
-            '</form>',
+            '<div>',
+            '  <label for="username">Username</label>',
+            '  <input id="username" type="email" name="username" value="test@test.com" placeholder="Enter your email"/>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 
     public function testValidatorsBulma(): void
@@ -109,43 +97,37 @@ class UsernameFormTest extends TestCase
         $form->fill(['username' => '']);
         $this->assertFalse($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div class="field">',
-            '    <label class="label" for="username">Username</label>',
-            '    <div class="control">',
-            '      <input id="username" class="input is-danger" type="email" name="username" value="" placeholder="Enter your email"/>',
-            '    </div>',
-            '    <p class="help is-danger">Username is required</p>',
+            '<div class="field">',
+            '  <label class="label" for="username">Username</label>',
+            '  <div class="control">',
+            '    <input id="username" class="input is-danger" type="email" name="username" value="" placeholder="Enter your email"/>',
             '  </div>',
-            '</form>',
+            '  <p class="help is-danger">Username is required</p>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['username' => 'some_random_username']);
         $this->assertFalse($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div class="field">',
-            '    <label class="label" for="username">Username</label>',
-            '    <div class="control">',
-            '      <input id="username" class="input is-danger" type="email" name="username" value="some_random_username" placeholder="Enter your email"/>',
-            '    </div>',
-            '    <p class="help is-danger">Enter a valid email address</p>',
+            '<div class="field">',
+            '  <label class="label" for="username">Username</label>',
+            '  <div class="control">',
+            '    <input id="username" class="input is-danger" type="email" name="username" value="some_random_username" placeholder="Enter your email"/>',
             '  </div>',
-            '</form>',
+            '  <p class="help is-danger">Enter a valid email address</p>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
         $form->fill(['username' => 'test@test.com']);
         $this->assertTrue($form->validate());
         $lines = [
-            '<form method="post">',
-            '  <div class="field">',
-            '    <label class="label" for="username">Username</label>',
-            '    <div class="control">',
-            '      <input id="username" class="input" type="email" name="username" value="test@test.com" placeholder="Enter your email"/>',
-            '    </div>',
+            '<div class="field">',
+            '  <label class="label" for="username">Username</label>',
+            '  <div class="control">',
+            '    <input id="username" class="input" type="email" name="username" value="test@test.com" placeholder="Enter your email"/>',
             '  </div>',
-            '</form>',
+            '</div>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
     }
 }
