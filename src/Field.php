@@ -137,7 +137,7 @@ class Field
         if ($message) {
             if (!$this->error) {
                 /** @var Error */
-                $error = Elements::create('Error');
+                $error = Elements::error();
                 $this->error = $error;
             }
         } else if ($this->hideError) {

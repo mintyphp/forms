@@ -104,11 +104,32 @@ In the future we will add support for other frameworks, such as bootstrap 5.
 
 ## Backend frameworks
 
+This package has been tested with the MintyPHP backend framework. It can also be used with other frameworks as this package has no dependencies at all.
 
+Although we don't recommend you to use MintyPHP Forms without a framework, it is certainly possible, see the full example.
 
 ## Full example
 
-Although we don't encourage you to use MintyPHP Forms without a framework, it is certainly possible:
+The Form object has the following data methods:
+
+- **fill**: Fill the form with an array of data (e.g. $_POST)
+- **validate**: Validate the form and add errors where needed
+- **addErrors**: Add custom errors (after validation)
+- **extract**: Extract the filled in form values
+- **render**: Output the form with or without root element
+
+These data methods are typically used on GET:
+
+- GET:
+  - fill (with default values or from database)
+  - render
+- POST: 
+  - fill (from POST data)
+  - validate
+    - on success: extract
+    - on errors: render
+
+You can see how these are used in the following full example:
 
 ```php
 <?php

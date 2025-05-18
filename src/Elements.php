@@ -45,8 +45,7 @@ class Elements
         return $field;
     }
 
-
-    public static function create(string $className): object
+    protected static function create(string $className): object
     {
         $class = self::$namespaces[self::$style] . $className;
         if (class_exists($class)) {
