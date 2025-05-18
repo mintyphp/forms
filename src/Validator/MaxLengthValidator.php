@@ -7,9 +7,9 @@ class MaxLengthValidator implements Validator
     protected int $maxLength;
     protected string $message = 'Exceeds maximum length';
 
-    public function __construct(string $maxLength)
+    public function __construct(int $maxLength)
     {
-        if (!is_numeric($maxLength) || intval($maxLength) < 0) {
+        if ($maxLength < 0) {
             throw new \InvalidArgumentException('Max length must be a non-negative integer');
         }
         $this->maxLength = intval($maxLength);
