@@ -31,6 +31,15 @@ class Validators
         return $validator;
     }
 
+    public static function int(string $message = ''): Validator
+    {
+        $validator = new IntValidator();
+        if ($message) {
+            $validator->message($message);
+        }
+        return $validator;
+    }
+
     public static function length(int $maxLength, string $message = ''): Validator
     {
         $validator = new MaxLengthValidator();
