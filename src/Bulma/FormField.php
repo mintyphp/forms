@@ -20,13 +20,13 @@ class FormField extends Base
         $this->removeClass('error');
     }
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         if ($this->control instanceof FormCheckbox && $this->label) {
             $this->label->removeClass('label');
             $this->label->addClass('checkbox');
-            $control = $this->control->render($doc);
-            $label = $this->label->render($doc);
+            $control = $this->control->renderDom($doc);
+            $label = $this->label->renderDom($doc);
             $text = $label->textContent;
             $label->textContent = '';
             $field = $this->renderElement($doc);
@@ -34,19 +34,19 @@ class FormField extends Base
             $label->insertAdjacentText('beforeend', $text);
             $field->appendChild($label);
             if ($this->error) {
-                $field->appendChild($this->error->render($doc));
+                $field->appendChild($this->error->renderDom($doc));
             }
             return $field;
         }
         if ($this->control instanceof FormCheckboxes && $this->label) {
             $field = $this->renderElement($doc);
-            $field->appendChild($this->label->render($doc));
-            $field->appendChild($this->control->render($doc));
+            $field->appendChild($this->label->renderDom($doc));
+            $field->appendChild($this->control->renderDom($doc));
             if ($this->error) {
-                $field->appendChild($this->error->render($doc));
+                $field->appendChild($this->error->renderDom($doc));
             }
             return $field;
         }
-        return parent::render($doc);
+        return parent::renderDom($doc);
     }
 }

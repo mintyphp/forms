@@ -26,7 +26,7 @@ class FormError
         $this->message($message);
     }
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $label = $this->renderElement($doc);
         $label->textContent = $this->message;

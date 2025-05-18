@@ -16,12 +16,12 @@ class FormSelect extends Base
         }
     }
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $wrapper = $doc->createElement('div');
         $classes = array_merge(['select'], $this->classes);
         $wrapper->setAttribute('class', implode(' ', $classes));
-        $select = parent::render($doc);
+        $select = parent::renderDom($doc);
         $select->removeAttribute('class');
         $wrapper->appendChild($select);
         return $wrapper;

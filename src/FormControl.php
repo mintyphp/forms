@@ -17,5 +17,5 @@ interface FormControl
     public function fill(array $data): void;
     public function validate(Validator $validator): string;
     public function setError(string $message): void;
-    public function render(\DOMDocument $doc): \DOMElement;
+    public function renderDom(\DOMDocument $doc): \DOMElement;
 }

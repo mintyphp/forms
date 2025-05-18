@@ -29,7 +29,7 @@ class UsernameFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 
     public function testRenderBulma(): void
@@ -45,7 +45,7 @@ class UsernameFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 
     public function testFillForm(): void
@@ -60,7 +60,7 @@ class UsernameFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 
     public function testValidators(): void
@@ -77,7 +77,7 @@ class UsernameFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['username' => 'some_random_username']);
         $this->assertFalse($form->validate());
         $lines = [
@@ -89,7 +89,7 @@ class UsernameFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['username' => 'test@test.com']);
         $this->assertTrue($form->validate());
         $lines = [
@@ -100,7 +100,7 @@ class UsernameFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 
     public function testValidatorsBulma(): void
@@ -119,7 +119,7 @@ class UsernameFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['username' => 'some_random_username']);
         $this->assertFalse($form->validate());
         $lines = [
@@ -133,7 +133,7 @@ class UsernameFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['username' => 'test@test.com']);
         $this->assertTrue($form->validate());
         $lines = [
@@ -146,6 +146,6 @@ class UsernameFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 }

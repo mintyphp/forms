@@ -23,7 +23,7 @@ class FormCheckboxes extends Base
         }
     }
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $div = $this->renderElement($doc);
         foreach ($this->options as $key => $value) {

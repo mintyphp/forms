@@ -71,15 +71,15 @@ class FormFieldset
         }
     }
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $fieldset = $this->renderElement($doc);
         if ($this->header) {
-            $headerElement = $this->header->render($doc);
+            $headerElement = $this->header->renderDom($doc);
             $fieldset->appendChild($headerElement);
         }
         foreach ($this->fields as $field) {
-            $fieldElement = $field->render($doc);
+            $fieldElement = $field->renderDom($doc);
             $fieldset->appendChild($fieldElement);
         }
         return $fieldset;

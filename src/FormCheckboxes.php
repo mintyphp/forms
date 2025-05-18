@@ -68,7 +68,7 @@ class FormCheckboxes implements FormControl
 
     public function setError(string $message): void {}
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $wrapper = $doc->createElement('fieldset');
         $wrapperId = $this->getId();

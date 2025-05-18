@@ -132,7 +132,7 @@ class FormField
         }
     }
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $field = $this->renderElement($doc);
         if ($this->control && $this->label) {
@@ -144,10 +144,10 @@ class FormField
             $this->label->for($id);
         }
         if ($this->label) {
-            $field->appendChild($this->label->render($doc));
+            $field->appendChild($this->label->renderDom($doc));
         }
         if ($this->control) {
-            $control = $this->control->render($doc);
+            $control = $this->control->renderDom($doc);
             if ($this->disabled) {
                 $control->setAttribute('disabled', 'disabled');
             }
@@ -163,7 +163,7 @@ class FormField
             $field->appendChild($control);
         }
         if ($this->error) {
-            $field->appendChild($this->error->render($doc));
+            $field->appendChild($this->error->renderDom($doc));
         }
         return $field;
     }

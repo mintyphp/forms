@@ -56,7 +56,7 @@ class TextArea extends FormInput
 
     public function setError(string $message): void {}
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $textarea = $this->renderElement($doc);
         $textarea->setAttribute('type', $this->type);

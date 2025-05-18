@@ -69,7 +69,7 @@ class FormInput implements FormControl
 
     public function setError(string $message): void {}
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $input = $this->renderElement($doc);
         $input->setAttribute('type', $this->type);

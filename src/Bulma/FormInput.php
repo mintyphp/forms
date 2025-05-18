@@ -22,7 +22,7 @@ class FormInput extends Base
         }
     }
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         if ($this->type == 'submit') {
             $this->removeClass('input');
@@ -31,7 +31,7 @@ class FormInput extends Base
         }
         $wrapper = $doc->createElement('div');
         $wrapper->setAttribute('class', 'control');
-        $input = parent::render($doc);
+        $input = parent::renderDom($doc);
         $wrapper->appendChild($input);
         return $wrapper;
     }

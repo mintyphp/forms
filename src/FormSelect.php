@@ -68,7 +68,7 @@ class FormSelect implements FormControl
 
     public function setError(string $message): void {}
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $select = $this->renderElement($doc);
         $select->setAttribute('name', $this->name);

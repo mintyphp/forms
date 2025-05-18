@@ -13,7 +13,7 @@ class FormLegend
         $this->tag('legend');
     }
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $label = $this->renderElement($doc);
         return $label;

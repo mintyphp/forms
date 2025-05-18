@@ -31,7 +31,7 @@ class FormLabel
     public function setError(string $message): void {}
 
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $label = $this->renderElement($doc);
         if ($this->for) {

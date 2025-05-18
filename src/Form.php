@@ -127,7 +127,7 @@ class Form
         return $isValid;
     }
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         // Create a new DOMElement for the form
         $formElement = $doc->createElement('form');
@@ -147,7 +147,7 @@ class Form
             $formElement->setAttribute($name, $value);
         }
         foreach ($this->fieldsets as $fieldset) {
-            $fieldsetElement = $fieldset->render($doc);
+            $fieldsetElement = $fieldset->renderDom($doc);
             if ($this->hideFieldsets) {
                 foreach ($fieldsetElement->childNodes as $child) {
                     $formElement->appendChild($child);
@@ -159,32 +159,16 @@ class Form
         return $formElement;
     }
 
-    private function addCsrfInput(\DOMDocument $doc, \DOMElement $form): void
-    {
-        if (!$form->getAttribute('method') || $form->getAttribute('method') == 'GET') {
-            return;
-        }
-        if (class_exists('MintyPHP\Session')) {
-            ob_start();
-            // @phpstan-ignore-next-line
-            forward_static_call(['MintyPHP\Session', 'getCsrfInput']);
-            $csrfInput = ob_get_clean();
-            if ($csrfInput) {
-                // add raw xml to the DOM
-                $dom = new \DOMDocument('1.0', 'UTF-8');
-                $dom->loadXML($csrfInput);
-                $importedNode = $doc->importNode($dom->documentElement, true);
-                $form->appendChild($importedNode);
-            }
-        }
-    }
-
-    public function __toString(): string
+    public function toString(bool $withRoot = true): string
     {
         // save the DOMElement to a string
         $domDocument = new \DOMDocument('1.0', 'UTF-8');
-        $form = $this->render($domDocument);
-        $this->addCsrfInput($domDocument, $form);
+        $form = $this->renderDom($domDocument);
+        if (!$withRoot) {
+            foreach ($form->childNodes as $child) {
+                $domDocument->appendChild($child);
+            }
+        }
         $domDocument->appendChild($form);
         // format the output
         $domDocument->formatOutput = true;
@@ -195,5 +179,10 @@ class Form
             throw new \RuntimeException('Failed to save XML');
         }
         return trim(preg_replace('/<\?xml.*?\?>/', '', $str));
+    }
+
+    public function render(bool $withRoot = false): void
+    {
+        echo $this->toString($withRoot);
     }
 }

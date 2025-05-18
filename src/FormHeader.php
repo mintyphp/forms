@@ -19,7 +19,7 @@ class FormHeader
         return $this;
     }
 
-    public function render(\DOMDocument $doc): \DOMElement
+    public function renderDom(\DOMDocument $doc): \DOMElement
     {
         return $this->renderElement($doc);
     }

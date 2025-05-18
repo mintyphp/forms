@@ -62,7 +62,7 @@ class CountryFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 
     public function testRenderBulma(): void
@@ -87,7 +87,7 @@ class CountryFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 
     public function testFillForm(): void
@@ -153,7 +153,7 @@ class CountryFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 
     public function testValidators(): void
@@ -191,7 +191,7 @@ class CountryFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['countries' => ['USA']]);
         $this->assertFalse($form->validate());
         $lines = [
@@ -224,7 +224,7 @@ class CountryFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['countries' => ['BE', 'DE']]);
         $this->assertTrue($form->validate());
         $lines = [
@@ -256,7 +256,7 @@ class CountryFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 
     public function testValidatorsBulma(): void
@@ -284,7 +284,7 @@ class CountryFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['countries' => ['USA']]);
         $this->assertFalse($form->validate());
         $lines = [
@@ -307,7 +307,7 @@ class CountryFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['countries' => ['BE', 'DE']]);
         $this->assertTrue($form->validate());
         $lines = [
@@ -329,6 +329,6 @@ class CountryFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 }

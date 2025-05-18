@@ -29,7 +29,7 @@ class ConfirmFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 
     public function testRenderBulma(): void
@@ -42,7 +42,7 @@ class ConfirmFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 
     public function testFillForm(): void
@@ -57,7 +57,7 @@ class ConfirmFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['confirm' => '']);
         $lines = [
             '<form method="post">',
@@ -67,11 +67,11 @@ class ConfirmFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['confirm' => 'off']);
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill([]);
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 
     public function testValidators(): void
@@ -88,10 +88,10 @@ class ConfirmFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['confirm' => 'in-between']);
         $this->assertFalse($form->validate());
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['confirm' => 'on']);
         $this->assertTrue($form->validate());
         $lines = [
@@ -102,7 +102,7 @@ class ConfirmFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 
     public function testValidatorsBulma(): void
@@ -118,10 +118,10 @@ class ConfirmFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['confirm' => 'in-between']);
         $this->assertFalse($form->validate());
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
         $form->fill(['confirm' => 'on']);
         $this->assertTrue($form->validate());
         $lines = [
@@ -131,6 +131,6 @@ class ConfirmFormTest extends TestCase
             '  </div>',
             '</form>',
         ];
-        $this->assertEquals(implode("\n", $lines), $form->__toString());
+        $this->assertEquals(implode("\n", $lines), $form->toString());
     }
 }
