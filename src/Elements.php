@@ -72,6 +72,20 @@ class Elements
         return $input;
     }
 
+    public static function password(string $name = '', string $placeholder = ''): FormInput
+    {
+        /** @var FormInput */
+        $input = self::create('FormInput');
+        $input->type('password');
+        if ($name) {
+            $input->name($name);
+        }
+        if ($placeholder) {
+            $input->placeholder($placeholder);
+        }
+        return $input;
+    }
+
     public static function email(string $name = '', string $placeholder = ''): FormInput
     {
         /** @var FormInput */
