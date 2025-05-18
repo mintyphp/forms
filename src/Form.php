@@ -102,9 +102,21 @@ class Form
      */
     public function fields(array $fields): self
     {
+        $this->hideFieldsets = true;
+        $fieldset = new Fieldset();
         foreach ($fields as $field) {
-            $this->field($field);
+            $fieldset->field($field);
         }
+        $this->fieldset($fieldset);
+        return $this;
+    }
+
+    public function header(Header $header): self
+    {
+        $this->hideFieldsets = true;
+        $fieldset = new Fieldset();
+        $fieldset->header($header);
+        $this->fieldset($fieldset);
         return $this;
     }
 
