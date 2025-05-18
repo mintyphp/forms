@@ -14,7 +14,7 @@ class UrlValidator implements Validator
 
     public function validate(string $value): string
     {
-        if (!str_starts_with(strtolower($value), 'http')) {
+        if (!preg_match('/^https?:\/\//', strtolower($value))) {
             return $this->message;
         }
         return !filter_var($value, FILTER_VALIDATE_URL) ? $this->message : '';
