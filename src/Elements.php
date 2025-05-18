@@ -29,7 +29,7 @@ class Elements
     /**
      * @param Validator[] $validators
      */
-    public static function field(?FormControl $control = null, ?FormLabel $label = null, array $validators = []): FormField
+    public static function field(?FormControl $control = null, ?Label $label = null, array $validators = []): FormField
     {
         /** @var FormField */
         $field = self::create('FormField');
@@ -183,10 +183,10 @@ class Elements
         return $checkboxes;
     }
 
-    public static function label(string $caption = ''): FormLabel
+    public static function label(string $caption = ''): Label
     {
-        /** @var FormLabel */
-        $label = self::create('FormLabel');
+        /** @var Label */
+        $label = self::create('Label');
         if ($caption) {
             $label->caption($caption);
         }

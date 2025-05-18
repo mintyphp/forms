@@ -2,9 +2,9 @@
 
 namespace MintyPHP\Form\Bulma;
 
-use MintyPHP\Form\FormLabel as Base;
+use MintyPHP\Form\Label as Base;
 
-class FormLabel extends Base
+class Label extends Base
 {
     public function __construct()
     {

@@ -9,7 +9,7 @@ class FormField
 {
     use HtmlElement;
 
-    protected ?FormLabel $label = null;
+    protected ?Label $label = null;
     protected ?FormControl $control = null;
     protected ?FormError $error = null;
     /** @var Validator[] */
@@ -51,7 +51,7 @@ class FormField
         return $this;
     }
 
-    public function label(FormLabel $label): self
+    public function label(Label $label): self
     {
         $this->label = $label;
         return $this;
