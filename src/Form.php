@@ -9,10 +9,10 @@ class Form
     protected string $action = '';
     protected string $method = 'POST';
     protected string $enctype = 'application/x-www-form-urlencoded';
-    /** @var FormRow[] */
-    protected array $rows = [];
+    /** @var FormFieldset[] */
+    protected array $fieldsets = [];
 
-    protected bool $noRows = false;
+    protected bool $hideFieldsets = false;
 
     public function __construct() {}
 
@@ -68,20 +68,29 @@ class Form
         return $this;
     }
 
-    public function row(FormRow $row): self
+    public function fieldset(FormFieldset $fieldset): self
     {
-        $this->rows[] = $row;
+        $this->fieldsets[] = $fieldset;
         return $this;
     }
 
     /**
-     * @param FormRow[] $rows
+     * @param FormFieldset[] $fieldsets
      */
-    public function rows(array $rows): self
+    public function fieldsets(array $fieldsets): self
     {
-        foreach ($rows as $row) {
-            $this->row($row);
+        foreach ($fieldsets as $fieldset) {
+            $this->fieldset($fieldset);
         }
+        return $this;
+    }
+
+    public function field(FormField $field): self
+    {
+        $this->hideFieldsets = true;
+        $fieldset = new FormFieldset();
+        $fieldset->field($field);
+        $this->fieldset($fieldset);
         return $this;
     }
 
@@ -90,9 +99,8 @@ class Form
      */
     public function fields(array $fields): self
     {
-        $this->noRows = true;
         foreach ($fields as $field) {
-            $this->row((new FormRow())->field($field));
+            $this->field($field);
         }
         return $this;
     }
@@ -102,16 +110,16 @@ class Form
      */
     public function fill(array $data): void
     {
-        foreach ($this->rows as $row) {
-            $row->fill($data);
+        foreach ($this->fieldsets as $fieldset) {
+            $fieldset->fill($data);
         }
     }
 
     public function validate(): bool
     {
         $isValid = true;
-        foreach ($this->rows as $row) {
-            $valid = $row->validate();
+        foreach ($this->fieldsets as $fieldset) {
+            $valid = $fieldset->validate();
             if (!$valid) {
                 $isValid = false;
             }
@@ -138,14 +146,14 @@ class Form
         foreach ($this->attributes as $name => $value) {
             $formElement->setAttribute($name, $value);
         }
-        foreach ($this->rows as $row) {
-            $rowElement = $row->render($doc);
-            if ($this->noRows) {
-                foreach ($rowElement->childNodes as $child) {
+        foreach ($this->fieldsets as $fieldset) {
+            $fieldsetElement = $fieldset->render($doc);
+            if ($this->hideFieldsets) {
+                foreach ($fieldsetElement->childNodes as $child) {
                     $formElement->appendChild($child);
                 }
             } else {
-                $formElement->appendChild($rowElement);
+                $formElement->appendChild($fieldsetElement);
             }
         }
         return $formElement;

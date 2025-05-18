@@ -200,10 +200,10 @@ class Elements
         return $error;
     }
 
-    public static function row(): FormRow
+    public static function fieldset(): FormFieldset
     {
-        /** @var FormRow */
-        $row = self::create('FormRow');
-        return $row;
+        /** @var FormFieldset */
+        $fieldset = self::create('FormFieldset');
+        return $fieldset;
     }
 }

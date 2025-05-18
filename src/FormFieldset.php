@@ -5,7 +5,7 @@ namespace MintyPHP\Form;
 use MintyPHP\Form\HtmlElement;
 use DOMElement;
 
-class FormRow
+class FormFieldset
 {
     use HtmlElement;
 
@@ -73,15 +73,15 @@ class FormRow
 
     public function render(\DOMDocument $doc): \DOMElement
     {
-        $row = $this->renderElement($doc);
+        $fieldset = $this->renderElement($doc);
         if ($this->header) {
             $headerElement = $this->header->render($doc);
-            $row->appendChild($headerElement);
+            $fieldset->appendChild($headerElement);
         }
         foreach ($this->fields as $field) {
             $fieldElement = $field->render($doc);
-            $row->appendChild($fieldElement);
+            $fieldset->appendChild($fieldElement);
         }
-        return $row;
+        return $fieldset;
     }
 }
