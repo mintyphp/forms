@@ -3,9 +3,9 @@
 namespace MintyPHP\Form\Bulma;
 
 use DOMElement;
-use MintyPHP\Form\FormInput as Base;
+use MintyPHP\Form\Input as Base;
 
-class FormInput extends Base
+class Input extends Base
 {
     public function __construct()
     {

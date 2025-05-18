@@ -10,10 +10,13 @@ The Form object has the following methods:
 
 ## Tree
 
+A Form element has the following internal tree structure:
+
 - Form
   - Fieldset
     - Field
-      - Control (Input / Select / Checkbox)
+      - Control (Input/Select/Checkbox/TextArea)
       - Label
       - Error
       - Validators
+

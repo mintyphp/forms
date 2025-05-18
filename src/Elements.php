@@ -59,10 +59,10 @@ class Elements
         throw new \Exception("Class $class does not exist");
     }
 
-    public static function text(string $name = '', string $placeholder = ''): FormInput
+    public static function text(string $name = '', string $placeholder = ''): Input
     {
-        /** @var FormInput */
-        $input = self::create('FormInput');
+        /** @var Input */
+        $input = self::create('Input');
         if ($name) {
             $input->name($name);
         }
@@ -72,10 +72,10 @@ class Elements
         return $input;
     }
 
-    public static function password(string $name = '', string $placeholder = ''): FormInput
+    public static function password(string $name = '', string $placeholder = ''): Input
     {
-        /** @var FormInput */
-        $input = self::create('FormInput');
+        /** @var Input */
+        $input = self::create('Input');
         $input->type('password');
         if ($name) {
             $input->name($name);
@@ -86,10 +86,10 @@ class Elements
         return $input;
     }
 
-    public static function email(string $name = '', string $placeholder = ''): FormInput
+    public static function email(string $name = '', string $placeholder = ''): Input
     {
-        /** @var FormInput */
-        $input = self::create('FormInput');
+        /** @var Input */
+        $input = self::create('Input');
         $input->type('email');
         if ($name) {
             $input->name($name);
@@ -100,10 +100,10 @@ class Elements
         return $input;
     }
 
-    public static function number(string $name = '', string $placeholder = ''): FormInput
+    public static function number(string $name = '', string $placeholder = ''): Input
     {
-        /** @var FormInput */
-        $input = self::create('FormInput');
+        /** @var Input */
+        $input = self::create('Input');
         $input->type('number');
         if ($name) {
             $input->name($name);
@@ -114,10 +114,10 @@ class Elements
         return $input;
     }
 
-    public static function submit(string $caption = ''): FormInput
+    public static function submit(string $caption = ''): Input
     {
-        /** @var FormInput */
-        $input = self::create('FormInput');
+        /** @var Input */
+        $input = self::create('Input');
         $input->type('submit');
         if ($caption) {
             $input->value($caption);
