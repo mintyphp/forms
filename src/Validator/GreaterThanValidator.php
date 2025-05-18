@@ -25,7 +25,7 @@ class GreaterThanValidator implements Validator
 
     public function message(string $message): self
     {
-        $this->message = str_replace('{value}', strval($this->value), $message);
+        $this->message = str_replace('{value}', $this->value, $message);
         return $this;
     }
 

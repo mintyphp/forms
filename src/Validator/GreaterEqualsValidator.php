@@ -25,7 +25,10 @@ class GreaterEqualsValidator implements Validator
 
     public function message(string $message): self
     {
-        $this->message = str_replace('{value}', strval($this->value), $message);
+        if (strpos($message, '{value}') === false) {
+            throw new \InvalidArgumentException('Message must contain "{value}"');
+        }
+        $this->message = str_replace('{value}', $this->value, $message);
         return $this;
     }
 

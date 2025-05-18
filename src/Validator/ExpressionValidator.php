@@ -11,7 +11,7 @@ class ExpressionValidator implements Validator
     public function __construct(string $comperator, string $value)
     {
         if (!in_array($comperator, ['>', '>=', '<', '<='])) {
-            throw new \InvalidArgumentException('Comperator must be one of: >, >=, <, <=');
+            throw new \InvalidArgumentException('Comperator not supported');
         }
         if (!is_numeric($value)) {
             throw new \InvalidArgumentException('Value must be numeric');
@@ -37,12 +37,12 @@ class ExpressionValidator implements Validator
                 return floatval($value) <= floatval($this->value);
         }
         // If we reach here, something went wrong
-        throw new \RuntimeException('Invalid comperator: ' . $this->comperator);
+        throw new \RuntimeException('Not implemented comperator: ' . $this->comperator);
     }
 
     public function message(string $message): self
     {
-        $this->message = str_replace('{value}', strval($this->value), $message);
+        $this->message = str_replace(['{value}', '{comperator}'], [$this->value, $this->comperator], $message);
         return $this;
     }
 
