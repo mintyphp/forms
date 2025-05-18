@@ -40,7 +40,7 @@ class Validators
         return $validator;
     }
 
-    public static function compare(string $comperator, string $value, string $message = ''): Validator
+    public static function expression(string $comperator, string $value, string $message = ''): Validator
     {
         $validator = new ExpressionValidator($comperator, $value);
         if ($message) {
