@@ -153,6 +153,16 @@ class Form
         return $isValid;
     }
 
+    /**
+     * @param array<string, string> $messages
+     */
+    public function setErrors(array $messages): void
+    {
+        foreach ($this->fieldsets as $fieldset) {
+            $fieldset->setErrors($messages);
+        }
+    }
+
     public function renderDom(\DOMDocument $doc): \DOMElement
     {
         // Create a new DOMElement for the form

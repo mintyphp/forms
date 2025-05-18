@@ -63,6 +63,11 @@ class FormField
         return $this;
     }
 
+    public function getControl(): ?FormControl
+    {
+        return $this->control;
+    }
+
     /**
      * @param Validator[] $validators
      */

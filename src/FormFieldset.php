@@ -89,9 +89,17 @@ class FormFieldset
         return $isValid;
     }
 
-    public function setError(string $message): void
+    /**
+     * @param array<string, string> $messages
+     */
+    public function setErrors(array $messages): void
     {
         foreach ($this->fields as $field) {
+            $name = $field->getControl()->getName();
+            if (!isset($messages[$name])) {
+                continue;
+            }
+            $message = $messages[$name];
             $field->setError($message);
         }
     }

@@ -25,8 +25,8 @@ The package has no dependencies on other packages.
 Then add the following to alias the most used classes in your PHP file:
 
 ```php
-use MintyPHP\Forms\Elements as E;
-use MintyPHP\Forms\Elements as V;
+use MintyPHP\Form\Elements as E;
+use MintyPHP\Form\Validator\Validators as V;
 ```
 
 Create a simple login form using:
@@ -111,6 +111,8 @@ A Full Contact Form using Bulma
 <?php
 // include MintyPHP Forms
 require_once 'vendor/autoload.php';
+
+// alias the classes
 
 // set style to Bulma
 
