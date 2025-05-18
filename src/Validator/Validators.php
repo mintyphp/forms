@@ -49,7 +49,16 @@ class Validators
         return $validator;
     }
 
-    public static function length(string $maxLength, string $message = ''): Validator
+    public static function minLength(string $minLength, string $message = ''): Validator
+    {
+        $validator = new MinLengthValidator($minLength);
+        if ($message) {
+            $validator->message($message);
+        }
+        return $validator;
+    }
+
+    public static function maxLength(string $maxLength, string $message = ''): Validator
     {
         $validator = new MaxLengthValidator($maxLength);
         if ($message) {
