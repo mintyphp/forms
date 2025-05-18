@@ -66,4 +66,79 @@ class ReadmeFormTest extends TestCase
         ];
         $this->assertEquals(implode("\n", $lines), $form->toString(true, false));
     }
+
+    public function testValidateForm(): void
+    {
+        E::$style = 'bulma';
+        $form = E::form([
+            E::field(E::text('username'), E::label('Username'), [V::required('Username is required')]),
+            E::field(E::password('password'), E::label('Password')),
+            E::field(E::submit('Login')),
+        ]);
+        $form->fill(['username' => '', 'password' => '']);
+        $form->validate();
+        $lines = [
+            '<form method="post">',
+            '  <div class="field">',
+            '    <label class="label" for="username">Username</label>',
+            '    <div class="control">',
+            '      <input id="username" class="input is-danger" type="text" name="username" value=""/>',
+            '    </div>',
+            '    <p class="help is-danger">Username is required</p>',
+            '  </div>',
+            '  <div class="field">',
+            '    <label class="label" for="password">Password</label>',
+            '    <div class="control">',
+            '      <input id="password" class="input" type="password" name="password" value=""/>',
+            '    </div>',
+            '  </div>',
+            '  <div class="field">',
+            '    <div class="control">',
+            '      <input class="button is-primary" type="submit" value="Login"/>',
+            '    </div>',
+            '  </div>',
+            '</form>',
+        ];
+        $this->assertEquals(implode("\n", $lines), $form->toString(true, false));
+    }
+
+    public function testAddErrorsForm(): void
+    {
+        E::$style = 'bulma';
+        $form = E::form([
+            E::field(E::text('username'), E::label('Username'), [V::required('Username is required')]),
+            E::field(E::password('password'), E::label('Password')),
+            E::field(E::submit('Login')),
+        ]);
+        $form->fill(['username' => 'test', 'password' => 'test']);
+        $form->validate();
+        $form->addErrors([
+            'username' => 'Invalid username/password combination',
+            'password' => 'Invalid username/password combination',
+        ]);
+        $lines = [
+            '<form method="post">',
+            '  <div class="field">',
+            '    <label class="label" for="username">Username</label>',
+            '    <div class="control">',
+            '      <input id="username" class="input is-danger" type="text" name="username" value="test"/>',
+            '    </div>',
+            '    <p class="help is-danger">Invalid username/password combination</p>',
+            '  </div>',
+            '  <div class="field">',
+            '    <label class="label" for="password">Password</label>',
+            '    <div class="control">',
+            '      <input id="password" class="input is-danger" type="password" name="password" value="test"/>',
+            '    </div>',
+            '    <p class="help is-danger">Invalid username/password combination</p>',
+            '  </div>',
+            '  <div class="field">',
+            '    <div class="control">',
+            '      <input class="button is-primary" type="submit" value="Login"/>',
+            '    </div>',
+            '  </div>',
+            '</form>',
+        ];
+        $this->assertEquals(implode("\n", $lines), $form->toString(true, false));
+    }
 }
