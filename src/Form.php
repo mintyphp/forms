@@ -91,7 +91,7 @@ class Form
     public function field(Field $field): self
     {
         $this->hideFieldsets = true;
-        $fieldset = new Fieldset();
+        $fieldset = Elements::fieldset();
         $fieldset->field($field);
         $this->fieldset($fieldset);
         return $this;
@@ -103,7 +103,7 @@ class Form
     public function fields(array $fields): self
     {
         $this->hideFieldsets = true;
-        $fieldset = new Fieldset();
+        $fieldset = Elements::fieldset();
         foreach ($fields as $field) {
             $fieldset->field($field);
         }
@@ -114,7 +114,7 @@ class Form
     public function header(Header $header): self
     {
         $this->hideFieldsets = true;
-        $fieldset = new Fieldset();
+        $fieldset = Elements::fieldset();
         $fieldset->header($header);
         $this->fieldset($fieldset);
         return $this;
@@ -201,7 +201,8 @@ class Form
             $fieldsetElement = $fieldset->renderDom($doc);
             if ($this->hideFieldsets) {
                 foreach ($fieldsetElement->childNodes as $child) {
-                    $formElement->appendChild($child);
+                    // clone the child node to avoid moving it from its original parent
+                    $formElement->appendChild($child->cloneNode(true));
                 }
             } else {
                 $formElement->appendChild($fieldsetElement);
