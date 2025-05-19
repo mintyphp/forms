@@ -49,7 +49,7 @@ class Validators
         return $validator;
     }
 
-    public static function minLength(string $minLength, string $message = ''): Validator
+    public static function minLength(int $minLength, string $message = ''): Validator
     {
         $validator = new MinLengthValidator($minLength);
         if ($message) {

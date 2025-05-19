@@ -7,12 +7,12 @@ class MinLengthValidator implements Validator
     protected int $minLength;
     protected string $message = 'Exceeds minimum length';
 
-    public function __construct(string $minLength)
+    public function __construct(int $minLength)
     {
-        if (!is_numeric($minLength) || intval($minLength) < 0) {
+        if ($minLength < 0) {
             throw new \InvalidArgumentException('Min length must be a non-negative integer');
         }
-        $this->minLength = intval($minLength);
+        $this->minLength = $minLength;
     }
 
     public function message(string $message): self
