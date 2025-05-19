@@ -1,9 +1,10 @@
 <?php
 
+// alias the most used classes
 use MintyPHP\Form\Elements as E;
 use MintyPHP\Form\Validator\Validators as V;
 
-// include MintyPHP Forms
+// ensure all classes are (auto)loaded:
 require_once 'vendor/autoload.php';
 
 // set style to Bulma
