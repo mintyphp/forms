@@ -72,7 +72,7 @@ Just tell MintyPHP Forms that you want to use Bulmas style forms using:
 
 ```php
 E::$style = 'bulma';
-// now render the same form
+// create and render the same form
 $form = E::form([
     E::field(E::text('username'),E::label('Username'),[V::required('Username is required')]),
     E::field(E::password('password'),E::label('Password')),
