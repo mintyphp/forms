@@ -85,11 +85,17 @@ And has the following structure building methods:
 Instead of:
 
     $form = E::text()->name($name)->placeholder($placeholder);
+    $form = E::password()->name($name)->placeholder($placeholder);
+    $form = E::email()->name($name)->placeholder($placeholder);
+    $form = E::number()->name($name)->placeholder($placeholder);
     $form = E::submit()->value($value);
 
 You can use:
 
     $form = E::text($name,$placeholder);
+    $form = E::password($name,$placeholder);
+    $form = E::email($name,$placeholder);
+    $form = E::number($name,$placeholder);
     $form = E::submit($value);
 
 as a shortcut.
