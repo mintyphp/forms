@@ -22,14 +22,18 @@ The package has no dependencies on other packages.
 
 ## Quick Start
 
-Then add the following to alias the most used classes in your PHP file:
+Add the following to alias the most used classes in your PHP file:
 
 ```php
 use MintyPHP\Form\Elements as E;
 use MintyPHP\Form\Validator\Validators as V;
 ```
 
-Create a simple login form using:
+Now ensure all classes are (auto)loaded:
+
+    require_once 'vendor/autoload.php';
+
+And create a simple login form using:
 
 ```php
 $form = E::form([
