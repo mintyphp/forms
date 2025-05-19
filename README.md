@@ -117,7 +117,7 @@ In the future we will add support for other frameworks, such as bootstrap 5.
 
 This package has been tested with the MintyPHP backend framework. It can also be used with other frameworks as this package has no dependencies at all.
 
-Although we don't recommend you to use MintyPHP Forms without a framework, it is certainly possible, see the full example.
+Although we don't recommend you to use MintyPHP Forms without a backend (or frontend) framework, it is certainly possible, see the full example.
 
 ## Full example
 
