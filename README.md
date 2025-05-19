@@ -142,7 +142,7 @@ These data methods are typically used on GET:
 
 You can see how these are used in the following full example:
 
-- [example.php](example.php)
+[Full example - PHP code](example.php)
 
 Renders as:
 
