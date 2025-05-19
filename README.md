@@ -194,3 +194,5 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 </html>
 ```
+
+Read the rest of the [documentation](docs).
