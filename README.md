@@ -1,6 +1,6 @@
 # MintyPHP Forms
 
-MintyPHP Forms is a powerful PHP form builder that enables you to create and validate forms without having to write a lot of boiler plate code.
+MintyPHP Forms is a powerful PHP form builder that enables you to create and validate forms without having to write a lot of boilerplate code.
 
 ## Features
 
