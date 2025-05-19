@@ -31,7 +31,9 @@ use MintyPHP\Form\Validator\Validators as V;
 
 Now ensure all classes are (auto)loaded:
 
-    require_once 'vendor/autoload.php';
+```php
+require_once 'vendor/autoload.php';
+```
 
 And create a simple login form using:
 
