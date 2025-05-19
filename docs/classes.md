@@ -21,14 +21,14 @@ In alphabetical order:
 
 In alphabetical order: 
 
-- **EmailValidator**: Validate email addresses
-- **ExpressionValidator**: Numeric expressions (>, >=, <, <=)
-- **IntValidator**: Validate whole numbers
-- **MaxLengthValidator**: Set a maximum input length
-- **MinLengthValidator**: Set a minimum input length
-- **RegexValidator**: Validate against a regular expression
-- **RequiredValidator**: Field cannot be empty
-- **UrlValidator**: Validate a URL (http only)
+- **Email**: Validate email addresses
+- **Expression**: Numeric expressions (>, >=, <, <=)
+- **Integer**: Validate whole numbers
+- **MaxLength**: Set a maximum input length
+- **MinLength**: Set a minimum input length
+- **Regex**: Validate against a regular expression
+- **Required**: Field cannot be empty
+- **Url**: Validate a URL (http only)
 
 ## Tree
 
