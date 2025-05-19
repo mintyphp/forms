@@ -42,7 +42,7 @@ $form = E::form([
 Now render the form using:
 
 ```php
-$form->render(true);
+$form->render();
 ```
 
 And the output is:
