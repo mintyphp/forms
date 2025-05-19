@@ -79,25 +79,25 @@ $form->render(true);
 And the output will be form in the familiar Bulma style:
 
 ```html 
-<form method="post">',
-  <div class="field">',
-    <label class="label" for="username">Username</label>',
-    <div class="control">',
-      <input id="username" class="input" type="text" name="username" value=""/>',
-    </div>',
-  </div>',
-  <div class="field">',
-    <label class="label" for="password">Password</label>',
-    <div class="control">',
-      <input id="password" class="input" type="password" name="password" value=""/>',
-    </div>',
-  </div>',
-  <div class="field">',
-    <div class="control">',
-      <input class="button is-primary" type="submit" value="Login"/>',
-    </div>',
-  </div>',
-</form>',
+<form method="post">
+  <div class="field">
+    <label class="label" for="username">Username</label>
+    <div class="control">
+      <input id="username" class="input" type="text" name="username" value=""/>
+    </div>
+  </div>
+  <div class="field">
+    <label class="label" for="password">Password</label>
+    <div class="control">
+      <input id="password" class="input" type="password" name="password" value=""/>
+    </div>
+  </div>
+  <div class="field">
+    <div class="control">
+      <input class="button is-primary" type="submit" value="Login"/>
+    </div>
+  </div>
+</form>
 ```
 
 In the future we will add support for other frameworks, such as bootstrap 5.
