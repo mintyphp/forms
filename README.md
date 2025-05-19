@@ -187,7 +187,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.3/css/bulma.min.css">
 </head>
 
-<body class="container">
+<body class="container p-5">
     <h1 class="title">Login</h1>
     <?php $form->render(); ?>
 </body>
