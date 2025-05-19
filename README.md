@@ -37,10 +37,15 @@ $form = E::form([
     E::field(E::password('password'),E::label('Password')),
     E::field(E::submit('Login')),
 ]);
-$form->render(true);
 ```
 
 Now render the form using:
+
+```php
+$form->render(true);
+```
+
+And the output is:
 
 ```html 
 <form method="post">
