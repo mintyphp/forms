@@ -142,9 +142,9 @@ These data methods are typically used on GET:
 
 You can see how these are used in the following full example:
 
-[Full example - PHP code](example.php)
+[Full example - PHP code - Click here](example.php)
 
-Renders as:
+After filling in a password and clicking "Login" it renders as:
 
 ![example.png](example.png)
 
