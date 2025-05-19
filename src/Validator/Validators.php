@@ -33,7 +33,7 @@ class Validators
 
     public static function integer(string $message = ''): Validator
     {
-        $validator = new IntValidator();
+        $validator = new IntegerValidator();
         if ($message) {
             $validator->message($message);
         }
