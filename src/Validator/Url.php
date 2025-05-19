@@ -2,7 +2,7 @@
 
 namespace MintyPHP\Form\Validator;
 
-class UrlValidator implements Validator
+class Url implements Validator
 {
     protected string $message = 'Invalid URL';
 

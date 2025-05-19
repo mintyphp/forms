@@ -2,7 +2,7 @@
 
 namespace MintyPHP\Form\Validator;
 
-class RegexValidator implements Validator
+class Regex implements Validator
 {
     protected string $pattern;
     protected string $message = 'Invalid format';

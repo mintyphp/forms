@@ -2,7 +2,7 @@
 
 namespace MintyPHP\Form\Validator;
 
-class MaxLengthValidator implements Validator
+class MaxLength implements Validator
 {
     protected int $maxLength;
     protected string $message = 'Exceeds maximum length';

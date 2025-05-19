@@ -2,7 +2,7 @@
 
 namespace MintyPHP\Form\Validator;
 
-class ExpressionValidator implements Validator
+class Expression implements Validator
 {
     protected string $comparator;
     protected string $value;

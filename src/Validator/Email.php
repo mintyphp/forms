@@ -2,7 +2,7 @@
 
 namespace MintyPHP\Form\Validator;
 
-class EmailValidator implements Validator
+class Email implements Validator
 {
     protected string $message = 'Invalid email address';
 

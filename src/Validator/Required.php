@@ -2,7 +2,7 @@
 
 namespace MintyPHP\Form\Validator;
 
-class RequiredValidator implements Validator
+class Required implements Validator
 {
     protected string $message = 'Field is required';
 

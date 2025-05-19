@@ -6,7 +6,7 @@ class Validators
 {
     public static function required(string $message = ''): Validator
     {
-        $validator = new RequiredValidator();
+        $validator = new Required();
         if ($message) {
             $validator->message($message);
         }
@@ -15,7 +15,7 @@ class Validators
 
     public static function email(string $message = ''): Validator
     {
-        $validator = new EmailValidator();
+        $validator = new Email();
         if ($message) {
             $validator->message($message);
         }
@@ -24,7 +24,7 @@ class Validators
 
     public static function url(string $message = ''): Validator
     {
-        $validator = new UrlValidator();
+        $validator = new Url();
         if ($message) {
             $validator->message($message);
         }
@@ -33,7 +33,7 @@ class Validators
 
     public static function integer(string $message = ''): Validator
     {
-        $validator = new IntegerValidator();
+        $validator = new Integer();
         if ($message) {
             $validator->message($message);
         }
@@ -42,7 +42,7 @@ class Validators
 
     public static function expression(string $comperator, string $value, string $message = ''): Validator
     {
-        $validator = new ExpressionValidator($comperator, $value);
+        $validator = new Expression($comperator, $value);
         if ($message) {
             $validator->message($message);
         }
@@ -51,7 +51,7 @@ class Validators
 
     public static function minLength(int $minLength, string $message = ''): Validator
     {
-        $validator = new MinLengthValidator($minLength);
+        $validator = new MinLength($minLength);
         if ($message) {
             $validator->message($message);
         }
@@ -60,7 +60,7 @@ class Validators
 
     public static function maxLength(int $maxLength, string $message = ''): Validator
     {
-        $validator = new MaxLengthValidator($maxLength);
+        $validator = new MaxLength($maxLength);
         if ($message) {
             $validator->message($message);
         }
@@ -69,7 +69,7 @@ class Validators
 
     public static function regex(string $pattern, string $message = ''): Validator
     {
-        $validator = new RegexValidator($pattern);
+        $validator = new Regex($pattern);
         if ($message) {
             $validator->message($message);
         }

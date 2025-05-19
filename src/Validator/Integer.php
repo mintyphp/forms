@@ -2,7 +2,7 @@
 
 namespace MintyPHP\Form\Validator;
 
-class IntegerValidator implements Validator
+class Integer implements Validator
 {
     protected string $message = 'Must be a whole number';
 
