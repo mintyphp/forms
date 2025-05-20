@@ -23,7 +23,7 @@ class MaxLength implements Validator
 
     public function evaluate(string $value): bool
     {
-        return mb_strlen($value) <= $this->maxLength;
+        return mb_strlen(trim($value)) <= $this->maxLength;
     }
 
     public function validate(string $value): string
