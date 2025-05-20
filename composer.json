@@ -10,8 +10,6 @@
     ],
     "require": {
         "php": ">=7.4",
-        "ext-memcache": "*",
-        "ext-mysqli": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "*",

@@ -2,6 +2,7 @@
 
 namespace MintyPHP\Form;
 
+use DOMDocument;
 use DOMElement;
 use MintyPHP\Form\Validator\Validator;
 
@@ -127,7 +128,7 @@ class Input implements Control
 
     public function setError(string $message): void {}
 
-    public function renderDom(\DOMDocument $doc): \DOMElement
+    public function renderDom(DOMDocument $doc): DOMElement
     {
         $input = $this->renderElement($doc);
         $input->setAttribute('type', $this->type);
