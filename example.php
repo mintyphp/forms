@@ -12,7 +12,7 @@ E::$style = 'bulma';
 
 // create a form object
 $form = E::form([
-    E::field(E::text('username'), E::label('Username'), [V::required('Username is required')]),
+    E::field(E::text('username')->required(), E::label('Username')),
     E::field(E::password('password'), E::label('Password')),
     E::field(E::submit('Login')),
 ]);

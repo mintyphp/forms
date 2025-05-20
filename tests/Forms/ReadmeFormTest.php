@@ -13,7 +13,7 @@ class ReadmeFormTest extends TestCase
     {
         E::$style = 'none';
         $form = E::form([
-            E::field(E::text('username')->required(), E::label('Username'), [V::required('Username is required')]),
+            E::field(E::text('username')->required(), E::label('Username')),
             E::field(E::password('password'), E::label('Password')),
             E::field(E::submit('Login')),
         ]);
@@ -39,7 +39,7 @@ class ReadmeFormTest extends TestCase
     {
         E::$style = 'bulma';
         $form = E::form([
-            E::field(E::text('username')->required(), E::label('Username'), [V::required('Username is required')]),
+            E::field(E::text('username')->required(), E::label('Username')),
             E::field(E::password('password'), E::label('Password')),
             E::field(E::submit('Login')),
         ]);
@@ -71,25 +71,24 @@ class ReadmeFormTest extends TestCase
     {
         E::$style = 'bulma';
         $form = E::form([
-            E::field(E::text('username')->required(), E::label('Username'), [V::required('Username is required')]),
+            E::field(E::text('username')->required(), E::label('Username')),
             E::field(E::password('password'), E::label('Password')),
             E::field(E::submit('Login')),
         ]);
-        $form->fill(['username' => '', 'password' => '']);
+        $form->fill(['username' => 'test', 'password' => 'test']);
         $form->validate();
         $lines = [
             '<form method="post">',
             '  <div class="field">',
             '    <label class="label" for="username">Username</label>',
             '    <div class="control">',
-            '      <input id="username" class="input is-danger" type="text" name="username" value="" required="required"/>',
+            '      <input id="username" class="input" type="text" name="username" value="test" required="required"/>',
             '    </div>',
-            '    <p class="help is-danger">Username is required</p>',
             '  </div>',
             '  <div class="field">',
             '    <label class="label" for="password">Password</label>',
             '    <div class="control">',
-            '      <input id="password" class="input" type="password" name="password" value=""/>',
+            '      <input id="password" class="input" type="password" name="password" value="test"/>',
             '    </div>',
             '  </div>',
             '  <div class="field">',
@@ -106,7 +105,7 @@ class ReadmeFormTest extends TestCase
     {
         E::$style = 'bulma';
         $form = E::form([
-            E::field(E::text('username')->required(), E::label('Username'), [V::required('Username is required')]),
+            E::field(E::text('username')->required(), E::label('Username')),
             E::field(E::password('password'), E::label('Password')),
             E::field(E::submit('Login')),
         ]);

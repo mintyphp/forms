@@ -80,8 +80,8 @@ Just tell MintyPHP Forms that you want to use Bulmas style forms using:
 E::$style = 'bulma';
 // create and render the login form
 $form = E::form([
-    E::field(E::text('username'),E::label('Username'),[V::required('Username is required')]),
-    E::field(E::password('password'),E::label('Password')),
+    E::field(E::text('username')->required(), E::label('Username')),
+    E::field(E::password('password'), E::label('Password')),
     E::field(E::submit('Login')),
 ]);
 $form->render(true);
@@ -94,7 +94,7 @@ And the output will be form in the familiar Bulma style:
   <div class="field">
     <label class="label" for="username">Username</label>
     <div class="control">
-      <input id="username" class="input" type="text" name="username" value=""/>
+      <input id="username" class="input" type="text" name="username" value="" required="required"/>
     </div>
   </div>
   <div class="field">
