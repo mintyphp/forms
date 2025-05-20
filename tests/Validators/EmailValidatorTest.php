@@ -19,9 +19,7 @@ class EmailValidatorTest extends TestCase
         ];
     }
 
-    /**
-     * @dataProvider addressDataProvider
-     */
+    #[DataProvider('addressDataProvider')]
     public function testValidEmail(string $address, bool $expected): void
     {
         $validator = Validators::email('invalid email');
