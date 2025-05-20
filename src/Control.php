@@ -11,6 +11,7 @@ interface Control
     public function name(string $name): self;
     public function getName(): string;
     public function value(string $value): self;
+    public function required(): self;
     /**
      * @param array<string, string|string[]|null> $data
      */

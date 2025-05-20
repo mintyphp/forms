@@ -13,6 +13,7 @@ class Input implements Control
     protected string $value = '';
     protected string $type = 'text';
     protected string $placeholder = '';
+    protected bool $required = false;
 
     public function __construct()
     {
@@ -34,6 +35,12 @@ class Input implements Control
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function required(): self
+    {
+        $this->required = true;
+        return $this;
     }
 
     public function value(string $value): self
@@ -77,6 +84,9 @@ class Input implements Control
 
     public function validate(Validator $validator): string
     {
+        if (!$this->required && !$this->value) {
+            return '';
+        }
         return $validator->validate($this->value);
     }
 

@@ -14,6 +14,7 @@ class Checkboxes implements Control
     protected array $options = [];
     /** @var string[] $values */
     protected array $values = [];
+    protected bool $required = false;
 
     public function __construct()
     {
@@ -29,6 +30,12 @@ class Checkboxes implements Control
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function required(): self
+    {
+        $this->required = true;
+        return $this;
     }
 
     /**
@@ -71,6 +78,9 @@ class Checkboxes implements Control
 
     public function validate(Validator $validator): string
     {
+        if (!$this->required && !$this->values) {
+            return '';
+        }
         if (array_diff($this->values, array_keys($this->options))) {
             return 'Invalid checkbox value';
         }

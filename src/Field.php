@@ -25,10 +25,12 @@ class Field
     public function __construct()
     {
         $this->tag('div');
+        $this->class('form-group');
     }
 
     public function disabled(): self
     {
+        $this->class('disabled');
         $this->disabled = true;
         return $this;
     }
@@ -101,7 +103,7 @@ class Field
     public function extract(): array
     {
         $data = [];
-        if ($this->control) {
+        if ($this->control && !$this->disabled) {
             $data = $this->control->extract();
         }
         return $data;
