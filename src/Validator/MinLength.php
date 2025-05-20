@@ -23,7 +23,7 @@ class MinLength implements Validator
 
     public function evaluate(string $value): bool
     {
-        return mb_strlen($value) <= $this->minLength;
+        return mb_strlen($value) >= $this->minLength;
     }
 
     public function validate(string $value): string
