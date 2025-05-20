@@ -9,7 +9,7 @@ class Form
     protected string $action = '';
     protected string $method = 'POST';
     protected string $enctype = 'application/x-www-form-urlencoded';
-    /** @var Fieldset[] */
+    /** @var Fieldset[] $fieldsets */
     protected array $fieldsets = [];
 
     protected bool $hideFieldsets = false;
@@ -131,14 +131,14 @@ class Form
     }
 
     /**
-     * @return array<string, string|string[]|null>
+     * @return array<string, string|string[]|null> $data
      */
-    public function extract(): array
+    public function extract(bool $withNulls = false): array
     {
 
         $data = [];
         foreach ($this->fieldsets as $fieldset) {
-            foreach ($fieldset->extract() as $name => $value) {
+            foreach ($fieldset->extract($withNulls) as $name => $value) {
                 if (isset($data[$name])) {
                     if (!is_array($data[$name])) {
                         $data[$name] = [$data[$name]];

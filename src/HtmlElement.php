@@ -11,7 +11,7 @@ trait HtmlElement
     protected string $id = '';
     /** @var string[] */
     protected array $classes = [];
-    /** @var array<string, string> */
+    /** @var array<string, string> $attributes */
     protected array $attributes = [];
 
     protected function tag(string $tag): self

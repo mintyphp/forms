@@ -12,44 +12,28 @@ class Field
     protected ?Label $label = null;
     protected ?Control $control = null;
     protected ?Error $error = null;
-    /** @var Validator[] */
+    /** @var Validator[] $validators */
     protected array $validators = [];
 
     protected bool $hideError = false;
 
     protected bool $disabled = false;
-    protected bool $readonly = false;
-    protected bool $required = false;
-    protected bool $autofocus = false;
 
     public function __construct()
     {
         $this->tag('div');
-        $this->class('form-group');
     }
 
     public function disabled(): self
     {
         $this->class('disabled');
         $this->disabled = true;
-        return $this;
-    }
-
-    public function readonly(): self
-    {
-        $this->readonly = true;
-        return $this;
-    }
-
-    public function required(): self
-    {
-        $this->required = true;
-        return $this;
-    }
-
-    public function autofocus(): self
-    {
-        $this->autofocus = true;
+        if ($this->label) {
+            $this->label->disabled();
+        }
+        if ($this->control) {
+            $this->control->disabled();
+        }
         return $this;
     }
 
@@ -98,13 +82,13 @@ class Field
     }
 
     /**
-     * @return array<string, string|string[]|null>
+     * @return array<string, string|string[]|null> $data
      */
-    public function extract(): array
+    public function extract(bool $withNulls = false): array
     {
         $data = [];
         if ($this->control && !$this->disabled) {
-            $data = $this->control->extract();
+            $data = $this->control->extract($withNulls);
         }
         return $data;
     }
@@ -126,9 +110,9 @@ class Field
     public function setError(string $message): void
     {
         if ($message) {
-            $this->addClass('has-error');
+            $this->addClass('error');
         } else {
-            $this->removeClass('has-error');
+            $this->removeClass('error');
         }
         if ($this->label) {
             $this->label->setError($message);
@@ -167,18 +151,6 @@ class Field
         }
         if ($this->control) {
             $control = $this->control->renderDom($doc);
-            if ($this->disabled) {
-                $control->setAttribute('disabled', 'disabled');
-            }
-            if ($this->readonly) {
-                $control->setAttribute('readonly', 'readonly');
-            }
-            if ($this->required) {
-                $control->setAttribute('required', 'required');
-            }
-            if ($this->autofocus) {
-                $control->setAttribute('autofocus', 'autofocus');
-            }
             $field->appendChild($control);
         }
         if ($this->error) {

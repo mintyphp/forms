@@ -14,7 +14,7 @@ class UsernameFormTest extends TestCase
     {
         E::$style = $style;
         return E::form([
-            E::field(E::email('username', 'Enter your email'), E::label('Username'), [V::required('Username is required'), V::email('Enter a valid email address')]),
+            E::field(E::email('username', 'Enter your email')->required(), E::label('Username'), [V::required('Username is required'), V::email('Enter a valid email address')]),
         ]);
     }
 
@@ -24,7 +24,7 @@ class UsernameFormTest extends TestCase
         $lines = [
             '<div>',
             '  <label for="username">Username</label>',
-            '  <input id="username" type="email" name="username" value="" placeholder="Enter your email"/>',
+            '  <input id="username" type="email" name="username" value="" placeholder="Enter your email" required="required"/>',
             '</div>',
         ];
         $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
@@ -37,7 +37,7 @@ class UsernameFormTest extends TestCase
             '<div class="field">',
             '  <label class="label" for="username">Username</label>',
             '  <div class="control">',
-            '    <input id="username" class="input" type="email" name="username" value="" placeholder="Enter your email"/>',
+            '    <input id="username" class="input" type="email" name="username" value="" placeholder="Enter your email" required="required"/>',
             '  </div>',
             '</div>',
         ];
@@ -51,7 +51,7 @@ class UsernameFormTest extends TestCase
         $lines = [
             '<div>',
             '  <label for="username">Username</label>',
-            '  <input id="username" type="email" name="username" value="some_random_username" placeholder="Enter your email"/>',
+            '  <input id="username" type="email" name="username" value="some_random_username" placeholder="Enter your email" required="required"/>',
             '</div>',
         ];
         $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
@@ -65,7 +65,7 @@ class UsernameFormTest extends TestCase
         $lines = [
             '<div class="error">',
             '  <label for="username">Username</label>',
-            '  <input id="username" type="email" name="username" value="" placeholder="Enter your email"/>',
+            '  <input id="username" type="email" name="username" value="" placeholder="Enter your email" required="required"/>',
             '  <div>Username is required</div>',
             '</div>',
         ];
@@ -75,7 +75,7 @@ class UsernameFormTest extends TestCase
         $lines = [
             '<div class="error">',
             '  <label for="username">Username</label>',
-            '  <input id="username" type="email" name="username" value="some_random_username" placeholder="Enter your email"/>',
+            '  <input id="username" type="email" name="username" value="some_random_username" placeholder="Enter your email" required="required"/>',
             '  <div>Enter a valid email address</div>',
             '</div>',
         ];
@@ -85,7 +85,7 @@ class UsernameFormTest extends TestCase
         $lines = [
             '<div>',
             '  <label for="username">Username</label>',
-            '  <input id="username" type="email" name="username" value="test@test.com" placeholder="Enter your email"/>',
+            '  <input id="username" type="email" name="username" value="test@test.com" placeholder="Enter your email" required="required"/>',
             '</div>',
         ];
         $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
@@ -100,7 +100,7 @@ class UsernameFormTest extends TestCase
             '<div class="field">',
             '  <label class="label" for="username">Username</label>',
             '  <div class="control">',
-            '    <input id="username" class="input is-danger" type="email" name="username" value="" placeholder="Enter your email"/>',
+            '    <input id="username" class="input is-danger" type="email" name="username" value="" placeholder="Enter your email" required="required"/>',
             '  </div>',
             '  <p class="help is-danger">Username is required</p>',
             '</div>',
@@ -112,7 +112,7 @@ class UsernameFormTest extends TestCase
             '<div class="field">',
             '  <label class="label" for="username">Username</label>',
             '  <div class="control">',
-            '    <input id="username" class="input is-danger" type="email" name="username" value="some_random_username" placeholder="Enter your email"/>',
+            '    <input id="username" class="input is-danger" type="email" name="username" value="some_random_username" placeholder="Enter your email" required="required"/>',
             '  </div>',
             '  <p class="help is-danger">Enter a valid email address</p>',
             '</div>',
@@ -124,7 +124,7 @@ class UsernameFormTest extends TestCase
             '<div class="field">',
             '  <label class="label" for="username">Username</label>',
             '  <div class="control">',
-            '    <input id="username" class="input" type="email" name="username" value="test@test.com" placeholder="Enter your email"/>',
+            '    <input id="username" class="input" type="email" name="username" value="test@test.com" placeholder="Enter your email" required="required"/>',
             '  </div>',
             '</div>',
         ];

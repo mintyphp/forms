@@ -13,7 +13,12 @@ class Input implements Control
     protected string $value = '';
     protected string $type = 'text';
     protected string $placeholder = '';
+
+    protected bool $disabled = false;
+    protected bool $readonly = false;
     protected bool $required = false;
+    protected bool $autofocus = false;
+    protected string $autocomplete = '';
 
     public function __construct()
     {
@@ -37,9 +42,33 @@ class Input implements Control
         return $this->name;
     }
 
+    public function disabled(): self
+    {
+        $this->disabled = true;
+        return $this;
+    }
+
+    public function readonly(): self
+    {
+        $this->readonly = true;
+        return $this;
+    }
+
     public function required(): self
     {
         $this->required = true;
+        return $this;
+    }
+
+    public function autofocus(): self
+    {
+        $this->autofocus = true;
+        return $this;
+    }
+
+    public function autocomplete(string $value): self
+    {
+        $this->autocomplete = $value;
         return $this;
     }
 
@@ -71,15 +100,21 @@ class Input implements Control
     }
 
     /**
-     * @return array<string, string|string[]|null>
+     * @return array<string, string|string[]|null> $data
      */
-    public function extract(): array
+    public function extract(bool $withNulls = false): array
     {
         if (!$this->name) {
             return [];
         }
+        if ($this->disabled) {
+            return [];
+        }
         $value = trim($this->value);
-        return [$this->name => strlen($value) ? $value : null];
+        if ($withNulls) {
+            $value = strlen($value) ? $value : null;
+        }
+        return [$this->name => $value];
     }
 
     public function validate(Validator $validator): string
@@ -102,6 +137,21 @@ class Input implements Control
         $input->setAttribute('value', $this->value);
         if ($this->placeholder) {
             $input->setAttribute('placeholder', $this->placeholder);
+        }
+        if ($this->disabled) {
+            $input->setAttribute('disabled', 'disabled');
+        }
+        if ($this->readonly) {
+            $input->setAttribute('readonly', 'readonly');
+        }
+        if ($this->required) {
+            $input->setAttribute('required', 'required');
+        }
+        if ($this->autofocus) {
+            $input->setAttribute('autofocus', 'autofocus');
+        }
+        if ($this->autocomplete) {
+            $input->setAttribute('autocomplete', 'on');
         }
         return $input;
     }

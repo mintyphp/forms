@@ -17,7 +17,7 @@ class Field extends Base
     public function setError(string $message): void
     {
         parent::setError($message);
-        $this->removeClass('has-error');
+        $this->removeClass('error');
     }
 
     public function renderDom(\DOMDocument $doc): \DOMElement

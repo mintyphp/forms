@@ -14,7 +14,13 @@ class Select implements Control
     protected array $options = [];
     /** @var string[] $values */
     protected array $values = [];
+
+    protected bool $disabled = false;
+    protected bool $readonly = false;
     protected bool $required = false;
+    protected bool $autofocus = false;
+    protected string $autocomplete = '';
+
     protected bool $multiple = false;
 
     public function __construct()
@@ -39,9 +45,33 @@ class Select implements Control
         return $this->name;
     }
 
+    public function disabled(): self
+    {
+        $this->disabled = true;
+        return $this;
+    }
+
+    public function readonly(): self
+    {
+        $this->readonly = true;
+        return $this;
+    }
+
     public function required(): self
     {
         $this->required = true;
+        return $this;
+    }
+
+    public function autofocus(): self
+    {
+        $this->autofocus = true;
+        return $this;
+    }
+
+    public function autocomplete(string $value): self
+    {
+        $this->autocomplete = $value;
         return $this;
     }
 
@@ -73,17 +103,24 @@ class Select implements Control
     }
 
     /**
-     * @return array<string, string|string[]|null>
+     * @return array<string, string|string[]|null> $data
      */
-    public function extract(): array
+    public function extract(bool $withNulls = false): array
     {
         if (!$this->name) {
             return [];
         }
-        if (!$this->values) {
-            return [$this->name => null];
+        if ($this->disabled) {
+            return [];
         }
-        return [$this->name => $this->multiple ? $this->values : implode(',', $this->values)];
+        if ($this->multiple) {
+            return [$this->name => $this->values];
+        }
+        $value = trim($this->values[0] ?? '');
+        if ($withNulls) {
+            $value = strlen($value) ? $value : null;
+        }
+        return [$this->name => $value];
     }
 
     public function validate(Validator $validator): string

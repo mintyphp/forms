@@ -14,7 +14,12 @@ class Checkboxes implements Control
     protected array $options = [];
     /** @var string[] $values */
     protected array $values = [];
+
+    protected bool $disabled = false;
+    protected bool $readonly = false;
     protected bool $required = false;
+    protected bool $autofocus = false;
+    protected string $autocomplete = '';
 
     public function __construct()
     {
@@ -32,9 +37,33 @@ class Checkboxes implements Control
         return $this->name;
     }
 
+    public function disabled(): self
+    {
+        $this->disabled = true;
+        return $this;
+    }
+
+    public function readonly(): self
+    {
+        $this->readonly = true;
+        return $this;
+    }
+
     public function required(): self
     {
         $this->required = true;
+        return $this;
+    }
+
+    public function autofocus(): self
+    {
+        $this->autofocus = true;
+        return $this;
+    }
+
+    public function autocomplete(string $value): self
+    {
+        $this->autocomplete = $value;
         return $this;
     }
 
@@ -66,11 +95,14 @@ class Checkboxes implements Control
     }
 
     /**
-     * @return array<string, string|string[]|null>
+     * @return array<string, string|string[]|null> $data
      */
-    public function extract(): array
+    public function extract(bool $withNulls = false): array
     {
         if (!$this->name) {
+            return [];
+        }
+        if ($this->disabled) {
             return [];
         }
         return [$this->name => $this->values];

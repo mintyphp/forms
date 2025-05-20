@@ -10,6 +10,7 @@ class Label
 
     protected string $caption = '';
     protected string $for = '';
+    protected bool $disabled = false;
 
     public function __construct()
     {
@@ -28,8 +29,14 @@ class Label
         return $this;
     }
 
-    public function setError(string $message): void {}
+    public function disabled(): self
+    {
+        $this->disabled = true;
+        $this->class('disabled');
+        return $this;
+    }
 
+    public function setError(string $message): void {}
 
     public function renderDom(\DOMDocument $doc): \DOMElement
     {

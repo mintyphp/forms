@@ -9,7 +9,7 @@ class Fieldset
 {
     use HtmlElement;
 
-    /** @var Field[] */
+    /** @var Field[] $fields */
     protected array $fields = [];
     protected ?Legend $legend = null;
     protected ?Header $header = null;
@@ -59,13 +59,13 @@ class Fieldset
     }
 
     /**
-     * @return array<string, string|string[]|null>
+     * @return array<string, string|string[]|null> $data
      */
-    public function extract(): array
+    public function extract(bool $withNulls = false): array
     {
         $data = [];
         foreach ($this->fields as $field) {
-            foreach ($field->extract() as $name => $value) {
+            foreach ($field->extract($withNulls) as $name => $value) {
                 if (isset($data[$name])) {
                     if (!is_array($data[$name])) {
                         $data[$name] = [$data[$name]];
