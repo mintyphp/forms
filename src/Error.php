@@ -12,7 +12,8 @@ class Error
 
     public function __construct()
     {
-        $this->tag('div');
+        $this->tag('span');
+        $this->class('help-block');
     }
 
     public function message(string $message): self
