@@ -124,9 +124,9 @@ class Field
     public function setError(string $message): void
     {
         if ($message) {
-            $this->addClass('error');
+            $this->addClass('has-error');
         } else {
-            $this->removeClass('error');
+            $this->removeClass('has-error');
         }
         if ($this->label) {
             $this->label->setError($message);
