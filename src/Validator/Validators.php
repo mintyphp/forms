@@ -40,7 +40,7 @@ class Validators
         return $validator;
     }
 
-    public static function expression(string $comperator, string $value, string $message = ''): Validator
+    public static function expression(string $comperator, string|int|float $value, string $message = ''): Validator
     {
         $validator = new Expression($comperator, $value);
         if ($message) {
@@ -70,6 +70,15 @@ class Validators
     public static function regex(string $pattern, string $message = ''): Validator
     {
         $validator = new Regex($pattern);
+        if ($message) {
+            $validator->message($message);
+        }
+        return $validator;
+    }
+
+    public static function function(callable $function, string $message = ''): Validator
+    {
+        $validator = new CustomFunc($function);
         if ($message) {
             $validator->message($message);
         }

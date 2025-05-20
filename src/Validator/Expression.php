@@ -5,10 +5,10 @@ namespace MintyPHP\Form\Validator;
 class Expression implements Validator
 {
     protected string $comparator;
-    protected string $value;
+    protected string|int|float $value;
     protected string $message = 'Number must be {comparator} {value}';
 
-    public function __construct(string $comparator, string $value)
+    public function __construct(string $comparator, string|int|float $value)
     {
         if (!in_array($comparator, ['>', '>=', '<', '<='])) {
             throw new \InvalidArgumentException('Comparator not supported');
@@ -42,7 +42,7 @@ class Expression implements Validator
 
     public function message(string $message): self
     {
-        $this->message = str_replace(['{value}', '{comparator}'], [$this->value, $this->comparator], $message);
+        $this->message = str_replace(['{value}', '{comparator}'], [strval($this->value), $this->comparator], $message);
         return $this;
     }
 

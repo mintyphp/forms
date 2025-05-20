@@ -151,7 +151,7 @@ class Elements
     }
 
     /**
-     * @param array<string, string> $options
+     * @param array<string|int, string> $options
      */
     public static function select(string $name = '', array $options = []): Select
     {

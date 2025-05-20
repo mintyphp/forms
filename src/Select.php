@@ -10,7 +10,7 @@ class Select implements Control
     use HtmlElement;
 
     protected string $name = '';
-    /** @var array<string,string> $options */
+    /** @var array<string|int,string> $options */
     protected array $options = [];
     /** @var string[] $values */
     protected array $values = [];
@@ -39,7 +39,7 @@ class Select implements Control
     }
 
     /**
-     * @param array<string,string> $options
+     * @param array<string|int,string> $options
      */
     public function options(array $options): self
     {
@@ -98,7 +98,7 @@ class Select implements Control
         }
         foreach ($this->options as $key => $value) {
             $option = $doc->createElement('option');
-            $option->setAttribute('value', $key);
+            $option->setAttribute('value', strval($key));
             if (in_array($key, $this->values)) {
                 $option->setAttribute('selected', 'selected');
             }
