@@ -14,6 +14,7 @@ class Select implements Control
     protected array $options = [];
     /** @var string[] $values */
     protected array $values = [];
+    protected string $placeholder = 'Select an option';
 
     protected bool $disabled = false;
     protected bool $readonly = false;
@@ -90,6 +91,12 @@ class Select implements Control
         return $this;
     }
 
+    public function placeholder(string $placeholder): self
+    {
+        $this->placeholder = $placeholder;
+        return $this;
+    }
+
     /**
      * @param array<string, string|string[]|null> $data
      */
@@ -143,6 +150,10 @@ class Select implements Control
         if ($this->multiple) {
             $select->setAttribute('multiple', 'multiple');
         }
+        $option = $doc->createElement('option');
+        $option->setAttribute('value', '');
+        $option->textContent = $this->placeholder;
+        $select->appendChild($option);
         foreach ($this->options as $key => $value) {
             $option = $doc->createElement('option');
             $option->setAttribute('value', strval($key));
