@@ -14,7 +14,7 @@ class Select implements Control
     protected array $options = [];
     /** @var string[] $values */
     protected array $values = [];
-    protected string $placeholder = 'Select an option';
+    protected string $placeholder = '';
 
     protected bool $disabled = false;
     protected bool $readonly = false;
