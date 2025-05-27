@@ -24,7 +24,7 @@ class ConfirmFormTest extends TestCase
         $lines = [
             '<div>',
             '  <label for="confirm">I agree to the terms and conditions</label>',
-            '  <input id="confirm" type="checkbox" name="confirm" value="on"/>',
+            '  <input id="confirm" type="checkbox" name="confirm" value="on" required="required"/>',
             '</div>',
         ];
         $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
@@ -35,7 +35,7 @@ class ConfirmFormTest extends TestCase
         $form = $this->createForm('bulma');
         $lines = [
             '<div class="field">',
-            '  <label class="checkbox"><input type="checkbox" name="confirm" value="on"/>I agree to the terms and conditions</label>',
+            '  <label class="checkbox"><input type="checkbox" name="confirm" value="on" required="required"/>I agree to the terms and conditions</label>',
             '</div>',
         ];
         $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
@@ -48,7 +48,7 @@ class ConfirmFormTest extends TestCase
         $lines = [
             '<div>',
             '  <label for="confirm">I agree to the terms and conditions</label>',
-            '  <input id="confirm" type="checkbox" name="confirm" value="on" checked="checked"/>',
+            '  <input id="confirm" type="checkbox" name="confirm" value="on" checked="checked" required="required"/>',
             '</div>',
         ];
         $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
@@ -56,7 +56,7 @@ class ConfirmFormTest extends TestCase
         $lines = [
             '<div>',
             '  <label for="confirm">I agree to the terms and conditions</label>',
-            '  <input id="confirm" type="checkbox" name="confirm" value="on"/>',
+            '  <input id="confirm" type="checkbox" name="confirm" value="on" required="required"/>',
             '</div>',
         ];
         $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
@@ -74,7 +74,7 @@ class ConfirmFormTest extends TestCase
         $lines = [
             '<div class="error">',
             '  <label for="confirm">I agree to the terms and conditions</label>',
-            '  <input id="confirm" type="checkbox" name="confirm" value="on"/>',
+            '  <input id="confirm" type="checkbox" name="confirm" value="on" required="required"/>',
             '  <div>Field must be checked</div>',
             '</div>',
         ];
@@ -87,7 +87,7 @@ class ConfirmFormTest extends TestCase
         $lines = [
             '<div>',
             '  <label for="confirm">I agree to the terms and conditions</label>',
-            '  <input id="confirm" type="checkbox" name="confirm" value="on" checked="checked"/>',
+            '  <input id="confirm" type="checkbox" name="confirm" value="on" checked="checked" required="required"/>',
             '</div>',
         ];
         $this->assertEquals(implode("\n", $lines), $form->toString(false, false));
@@ -100,7 +100,7 @@ class ConfirmFormTest extends TestCase
         $this->assertFalse($form->validate());
         $lines = [
             '<div class="field">',
-            '  <label class="checkbox"><input type="checkbox" name="confirm" value="on"/>I agree to the terms and conditions</label>',
+            '  <label class="checkbox"><input type="checkbox" name="confirm" value="on" required="required"/>I agree to the terms and conditions</label>',
             '  <p class="help is-danger">Field must be checked</p>',
             '</div>',
         ];
@@ -112,7 +112,7 @@ class ConfirmFormTest extends TestCase
         $this->assertTrue($form->validate());
         $lines = [
             '<div class="field">',
-            '  <label class="checkbox"><input type="checkbox" name="confirm" value="on" checked="checked"/>I agree to the terms and conditions</label>',
+            '  <label class="checkbox"><input type="checkbox" name="confirm" value="on" checked="checked" required="required"/>I agree to the terms and conditions</label>',
             '</div>',
         ];
         $this->assertEquals(implode("\n", $lines), $form->toString(false, false));

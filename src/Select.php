@@ -82,6 +82,9 @@ class Select implements Control
     public function options(array $options): self
     {
         $this->options = $options;
+        if (!isset($this->options[''])) {
+            $this->options = ['' => '...'] + $this->options; // Add empty option if not present
+        }
         return $this;
     }
 
@@ -150,10 +153,9 @@ class Select implements Control
         if ($this->multiple) {
             $select->setAttribute('multiple', 'multiple');
         }
-        $option = $doc->createElement('option');
-        $option->setAttribute('value', '');
-        $option->textContent = $this->placeholder;
-        $select->appendChild($option);
+        if ($this->required) {
+            $select->setAttribute('required', 'required');
+        }
         foreach ($this->options as $key => $value) {
             $option = $doc->createElement('option');
             $option->setAttribute('value', strval($key));

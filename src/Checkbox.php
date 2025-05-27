@@ -73,6 +73,9 @@ class Checkbox extends Input
         if ($this->checked) {
             $input->setAttribute('checked', 'checked');
         }
+        if ($this->required) {
+            $input->setAttribute('required', 'required');
+        }
         return $input;
     }
 }

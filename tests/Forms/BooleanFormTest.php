@@ -13,13 +13,12 @@ class BooleanFormTest extends TestCase
     private function createForm(string $style): Form
     {
         $booleans = [
-            '' => 'Select an option',
             'yes' => 'Yes',
             'no' => 'No',
         ];
         E::$style = $style;
         return E::form([
-            E::field(E::select('bool', $booleans), E::label('Yes or No?'), [V::required('Field cannot be empty')]),
+            E::field(E::select('bool', $booleans)->required(), E::label('Yes or No?'), [V::required('Field cannot be empty')]),
         ]);
     }
 
@@ -29,8 +28,8 @@ class BooleanFormTest extends TestCase
         $lines = [
             '<div>',
             '  <label for="bool">Yes or No?</label>',
-            '  <select id="bool" name="bool">',
-            '    <option value="">Select an option</option>',
+            '  <select id="bool" name="bool" required="required">',
+            '    <option value="">...</option>',
             '    <option value="yes">Yes</option>',
             '    <option value="no">No</option>',
             '  </select>',
@@ -46,8 +45,8 @@ class BooleanFormTest extends TestCase
             '<div class="field">',
             '  <label class="label" for="bool">Yes or No?</label>',
             '  <div class="select">',
-            '    <select id="bool" name="bool">',
-            '      <option value="">Select an option</option>',
+            '    <select id="bool" name="bool" required="required">',
+            '      <option value="">...</option>',
             '      <option value="yes">Yes</option>',
             '      <option value="no">No</option>',
             '    </select>',
@@ -64,8 +63,8 @@ class BooleanFormTest extends TestCase
         $lines = [
             '<div>',
             '  <label for="bool">Yes or No?</label>',
-            '  <select id="bool" name="bool">',
-            '    <option value="">Select an option</option>',
+            '  <select id="bool" name="bool" required="required">',
+            '    <option value="">...</option>',
             '    <option value="yes" selected="selected">Yes</option>',
             '    <option value="no">No</option>',
             '  </select>',
@@ -82,8 +81,8 @@ class BooleanFormTest extends TestCase
         $lines = [
             '<div class="error">',
             '  <label for="bool">Yes or No?</label>',
-            '  <select id="bool" name="bool">',
-            '    <option value="" selected="selected">Select an option</option>',
+            '  <select id="bool" name="bool" required="required">',
+            '    <option value="" selected="selected">...</option>',
             '    <option value="yes">Yes</option>',
             '    <option value="no">No</option>',
             '  </select>',
@@ -96,8 +95,8 @@ class BooleanFormTest extends TestCase
         $lines = [
             '<div class="error">',
             '  <label for="bool">Yes or No?</label>',
-            '  <select id="bool" name="bool">',
-            '    <option value="">Select an option</option>',
+            '  <select id="bool" name="bool" required="required">',
+            '    <option value="">...</option>',
             '    <option value="yes">Yes</option>',
             '    <option value="no">No</option>',
             '  </select>',
@@ -110,8 +109,8 @@ class BooleanFormTest extends TestCase
         $lines = [
             '<div>',
             '  <label for="bool">Yes or No?</label>',
-            '  <select id="bool" name="bool">',
-            '    <option value="">Select an option</option>',
+            '  <select id="bool" name="bool" required="required">',
+            '    <option value="">...</option>',
             '    <option value="yes">Yes</option>',
             '    <option value="no" selected="selected">No</option>',
             '  </select>',
@@ -129,8 +128,8 @@ class BooleanFormTest extends TestCase
             '<div class="field">',
             '  <label class="label" for="bool">Yes or No?</label>',
             '  <div class="select is-danger">',
-            '    <select id="bool" name="bool">',
-            '      <option value="" selected="selected">Select an option</option>',
+            '    <select id="bool" name="bool" required="required">',
+            '      <option value="" selected="selected">...</option>',
             '      <option value="yes">Yes</option>',
             '      <option value="no">No</option>',
             '    </select>',
@@ -145,8 +144,8 @@ class BooleanFormTest extends TestCase
             '<div class="field">',
             '  <label class="label" for="bool">Yes or No?</label>',
             '  <div class="select is-danger">',
-            '    <select id="bool" name="bool">',
-            '      <option value="">Select an option</option>',
+            '    <select id="bool" name="bool" required="required">',
+            '      <option value="">...</option>',
             '      <option value="yes">Yes</option>',
             '      <option value="no">No</option>',
             '    </select>',
@@ -161,8 +160,8 @@ class BooleanFormTest extends TestCase
             '<div class="field">',
             '  <label class="label" for="bool">Yes or No?</label>',
             '  <div class="select">',
-            '    <select id="bool" name="bool">',
-            '      <option value="">Select an option</option>',
+            '    <select id="bool" name="bool" required="required">',
+            '      <option value="">...</option>',
             '      <option value="yes">Yes</option>',
             '      <option value="no" selected="selected">No</option>',
             '    </select>',
