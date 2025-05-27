@@ -157,12 +157,11 @@ class Select implements Control
             $select->setAttribute('required', 'required');
         }
         foreach ($this->options as $key => $value) {
-            $option = $doc->createElement('option');
+            $option = $doc->createElement('option', $value);
             $option->setAttribute('value', strval($key));
             if (in_array($key, $this->values)) {
                 $option->setAttribute('selected', 'selected');
             }
-            $option->textContent = $value;
             $select->appendChild($option);
         }
         return $select;

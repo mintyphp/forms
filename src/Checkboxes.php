@@ -135,9 +135,8 @@ class Checkboxes implements Control
                 $checkbox->setAttribute('checked', 'checked');
             }
             $wrapper->appendChild($checkbox);
-            $label = $doc->createElement('label');
+            $label = $doc->createElement('label', $value);
             $label->setAttribute('for', $this->name . '_' . $key);
-            $label->textContent = $value;
             $wrapper->appendChild($label);
         }
         return $wrapper;

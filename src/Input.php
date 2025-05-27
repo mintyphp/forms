@@ -15,6 +15,9 @@ class Input implements Control
     protected string $type = 'text';
     protected string $placeholder = '';
 
+    /** @var array<string|int,string> $options */
+    protected array $options = [];
+
     protected bool $disabled = false;
     protected bool $readonly = false;
     protected bool $required = false;
@@ -86,6 +89,15 @@ class Input implements Control
     }
 
     /**
+     * @param array<string|int,string> $options
+     */
+    public function options(array $options): self
+    {
+        $this->options = $options;
+        return $this;
+    }
+
+    /**
      * @param array<string, string|string[]|null> $data
      */
     public function fill(array $data): void
@@ -153,6 +165,21 @@ class Input implements Control
         }
         if ($this->autocomplete) {
             $input->setAttribute('autocomplete', 'on');
+        }
+        if ($this->options) {
+            $input->setAttribute('list', $this->name . '-options');
+            $datalist = $doc->createElement('datalist');
+            $datalist->setAttribute('id', $this->name . '-options');
+            foreach ($this->options as $value => $label) {
+                $option = $doc->createElement('option', $label);
+                if (is_int($value)) {
+                    $option->setAttribute('value', $label);
+                } else {
+                    $option->setAttribute('value', $value);
+                }
+                $datalist->appendChild($option);
+            }
+            $doc->appendChild($datalist);
         }
         return $input;
     }
