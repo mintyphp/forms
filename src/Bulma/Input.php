@@ -29,10 +29,14 @@ class Input extends Base
             $this->addClass('button');
             $this->addClass('is-primary');
         }
-        $wrapper = $doc->createElement('div');
-        $wrapper->setAttribute('class', 'control');
         $input = parent::renderDom($doc);
-        $wrapper->appendChild($input);
+        if ($input->tagName == 'div') {
+            $wrapper = $input;
+        } else {
+            $wrapper = $doc->createElement('div');
+            $wrapper->appendChild($input);
+        }
+        $wrapper->setAttribute('class', 'control');
         return $wrapper;
     }
 }

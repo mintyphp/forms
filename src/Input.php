@@ -172,14 +172,15 @@ class Input implements Control
             $datalist->setAttribute('id', $this->name . '-options');
             foreach ($this->options as $value => $label) {
                 $option = $doc->createElement('option', $label);
-                if (is_int($value)) {
-                    $option->setAttribute('value', $label);
-                } else {
+                if (!is_int($value)) {
                     $option->setAttribute('value', $value);
                 }
                 $datalist->appendChild($option);
             }
-            $doc->appendChild($datalist);
+            $wrapper = $doc->createElement('div');
+            $wrapper->appendChild($input);
+            $wrapper->appendChild($datalist);
+            return $wrapper;
         }
         return $input;
     }
