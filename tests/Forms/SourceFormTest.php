@@ -20,7 +20,7 @@ class SourceFormTest extends TestCase
         ];
         E::$style = $style;
         return E::form([
-            E::field(E::text('source')->options($sources), E::label('How did you hear about us?'), [V::required('Field cannot be empty')]),
+            E::field(E::text('source')->options($sources), E::label('How did you find us?'), [V::required('Field cannot be empty')]),
         ]);
     }
 
@@ -29,7 +29,7 @@ class SourceFormTest extends TestCase
         $form = $this->createForm('none');
         $lines = [
             '<div>',
-            '  <label for="source">How did you hear about us?</label>',
+            '  <label for="source">How did you find us?</label>',
             '  <div>',
             '    <input id="source" type="text" name="source" value="" list="source-options"/>',
             '    <datalist id="source-options">',
@@ -49,7 +49,7 @@ class SourceFormTest extends TestCase
         $form = $this->createForm('bulma');
         $lines = [
             '<div class="field">',
-            '  <label class="label" for="source">How did you hear about us?</label>',
+            '  <label class="label" for="source">How did you find us?</label>',
             '  <div class="control">',
             '    <input id="source" class="input" type="text" name="source" value="" list="source-options"/>',
             '    <datalist id="source-options">',
