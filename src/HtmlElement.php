@@ -105,34 +105,4 @@ trait HtmlElement
         }
         return $element;
     }
-
-    public function toString(bool $withRoot = true, bool $asHtml = true): string
-    {
-        // save the DOMElement to a string
-        $domDocument = new \DOMDocument('1.0', 'UTF-8');
-        $form = $this->renderDom($domDocument);
-        $domDocument->appendChild($form);
-        if ($asHtml) {
-            // save the HTML to a string
-            $str = $domDocument->saveHTML($form);
-        } else {
-            // format the output as XML (for testing purposes)
-            $domDocument->formatOutput = true;
-            $str = $domDocument->saveXML($form);
-        }
-        if (!$str) {
-            throw new \RuntimeException('Failed to save XML');
-        }
-        if (!$withRoot) {
-            $str = str_replace("\n  ", "\n", $str);
-            $str = preg_replace('/^<' . $this->tag . '[^>]*>/', '', $str);
-            $str = preg_replace('/<\/' . $this->tag . '>$/', '', $str);
-        }
-        return trim($str);
-    }
-
-    public function render(bool $withRoot = true): void
-    {
-        echo $this->toString($withRoot);
-    }
 }
