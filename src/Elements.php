@@ -167,6 +167,25 @@ class Elements
     }
 
     /**
+     * @param array<string|int, string> $options
+     */
+    public static function selectOrType(string $name = '', array $options = [], string $typeCaption = ''): SelectOrType
+    {
+        /** @var SelectOrType */
+        $select = self::create('SelectOrType');
+        if ($name) {
+            $select->name($name);
+        }
+        if ($options) {
+            $select->options($options);
+        }
+        if ($typeCaption) {
+            $select->typeCaption($typeCaption);
+        }
+        return $select;
+    }
+
+    /**
      * @param array<string, string> $options
      */
     public static function checkboxes(string $name = '', array $options = []): Checkboxes

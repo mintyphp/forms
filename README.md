@@ -84,7 +84,7 @@ $form = E::form([
     E::field(E::password('password'), E::label('Password')),
     E::field(E::submit('Login')),
 ]);
-$form->render(true);
+$form->render();
 ```
 
 And the output will be form in the familiar Bulma style:
