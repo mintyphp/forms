@@ -129,7 +129,7 @@ class SelectOrType implements Control
         if ($this->disabled) {
             return [];
         }
-        $value = trim($this->values[0] ?? '');
+        $value = trim($this->value);
         if ($withNulls) {
             $value = strlen($value) ? $value : null;
         }
