@@ -10,9 +10,9 @@ class SelectOrType implements Control
     use HtmlElement;
 
     protected string $name = '';
-    /** @var array<string,string> $options */
+    /** @var array<string> $options */
     protected array $options = [];
-    /** @var array<string,string> $originalOptions */
+    /** @var array<string> $originalOptions */
     protected array $originalOptions = [];
     protected string $value = '';
     protected string $placeholder = '';
@@ -77,12 +77,12 @@ class SelectOrType implements Control
      */
     public function options(array $options): self
     {
-        $this->options = array_combine($options, $options);
-        if (!isset($this->options[''])) {
-            $this->options = ['' => '...'] + $this->options; // Add empty option if not present
+        $this->options = $options;
+        if (!in_array('', $this->options)) {
+            array_unshift($this->options, ''); // Add empty option if not present
         }
         $this->originalOptions = $this->options;
-        $this->options = $this->options + ['!type!' => $this->typeCaption];
+        $this->options[] = $this->typeCaption;
         return $this;
     }
 
@@ -91,9 +91,9 @@ class SelectOrType implements Control
         $this->value = $value;
         $this->options = $this->originalOptions;
         if ($this->value && !in_array($this->value, $this->options)) {
-            $this->options[$this->value] = $this->value;
+            $this->options[] = $this->value;
         }
-        $this->options = $this->options + ['!type!' => $this->typeCaption];
+        $this->options[] = $this->typeCaption;
         return $this;
     }
 
@@ -106,7 +106,8 @@ class SelectOrType implements Control
     public function typeCaption(string $typeCaption): self
     {
         $this->typeCaption = $typeCaption;
-        $this->options['!type!'] = $this->typeCaption;
+        array_pop($this->options);
+        array_push($this->options, $this->typeCaption);
         return $this;
     }
 
@@ -157,10 +158,11 @@ class SelectOrType implements Control
             $select->setAttribute('required', 'required');
         }
         $i = 0;
-        foreach ($this->options as $key => $value) {
-            $option = $doc->createElement('option', $value);
-            $option->setAttribute('value', strval($key));
-            if ($key == $this->value) {
+        foreach ($this->options as $value) {
+            $caption = $value ?: '...';
+            $option = $doc->createElement('option', $caption);
+            $option->setAttribute('value', $value);
+            if ($value == $this->value) {
                 $option->setAttribute('selected', 'selected');
             }
             $select->appendChild($option);
