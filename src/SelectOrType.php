@@ -160,10 +160,13 @@ class SelectOrType implements Control
         $i = 0;
         foreach ($this->options as $value) {
             $caption = $value ?: '...';
+            $isLast = $i == count($this->options) - 1;
             $option = $doc->createElement('option', $caption);
-            $option->setAttribute('value', $value);
-            if ($value == $this->value) {
-                $option->setAttribute('selected', 'selected');
+            if (!$isLast) {
+                $option->setAttribute('value', $value);
+                if ($value == $this->value) {
+                    $option->setAttribute('selected', 'selected');
+                }
             }
             $select->appendChild($option);
             $i += 1;

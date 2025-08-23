@@ -37,7 +37,7 @@ class DifferentFormTest extends TestCase
             '    <option value="Magazine">Magazine</option>',
             '    <option value="Newspaper">Newspaper</option>',
             '    <hr/>',
-            '    <option value="!type!">Different ...</option>',
+            '    <option value="">Different ...</option>',
             '  </select>',
             '</div>',
         ];
@@ -58,7 +58,7 @@ class DifferentFormTest extends TestCase
             '      <option value="Magazine">Magazine</option>',
             '      <option value="Newspaper">Newspaper</option>',
             '      <hr/>',
-            '      <option value="!type!">Different ...</option>',
+            '      <option value="">Different ...</option>',
             '    </select>',
             '  </div>',
             '</div>',
