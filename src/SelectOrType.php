@@ -10,9 +10,9 @@ class SelectOrType implements Control
     use HtmlElement;
 
     protected string $name = '';
-    /** @var array<string|int,string> $options */
+    /** @var array<string,string> $options */
     protected array $options = [];
-    /** @var array<string|int,string> $originalOptions */
+    /** @var array<string,string> $originalOptions */
     protected array $originalOptions = [];
     protected string $value = '';
     protected string $placeholder = '';
@@ -73,11 +73,11 @@ class SelectOrType implements Control
     }
 
     /**
-     * @param array<string|int,string> $options
+     * @param array<string> $options
      */
     public function options(array $options): self
     {
-        $this->options = $options;
+        $this->options = array_combine($options, $options);
         if (!isset($this->options[''])) {
             $this->options = ['' => '...'] + $this->options; // Add empty option if not present
         }

@@ -167,7 +167,7 @@ class Elements
     }
 
     /**
-     * @param array<string|int, string> $options
+     * @param array<string> $options
      */
     public static function selectOrType(string $name = '', array $options = [], string $typeCaption = ''): SelectOrType
     {
