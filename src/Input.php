@@ -15,7 +15,7 @@ class Input implements Control
     protected string $type = 'text';
     protected string $placeholder = '';
 
-    /** @var array<string|int,string> $options */
+    /** @var array<string> $options */
     protected array $options = [];
 
     protected bool $disabled = false;
@@ -89,7 +89,7 @@ class Input implements Control
     }
 
     /**
-     * @param array<string|int,string> $options
+     * @param array<string> $options
      */
     public function options(array $options): self
     {
@@ -170,11 +170,8 @@ class Input implements Control
             $input->setAttribute('list', $this->name . '-options');
             $datalist = $doc->createElement('datalist');
             $datalist->setAttribute('id', $this->name . '-options');
-            foreach ($this->options as $value => $label) {
-                $option = $doc->createElement('option', $label);
-                if (!is_int($value)) {
-                    $option->setAttribute('value', $value);
-                }
+            foreach ($this->options as $value) {
+                $option = $doc->createElement('option', $value);
                 $datalist->appendChild($option);
             }
             $wrapper = $doc->createElement('div');

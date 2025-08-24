@@ -10,7 +10,7 @@ class Select implements Control
     use HtmlElement;
 
     protected string $name = '';
-    /** @var array<string|int,string> $options */
+    /** @var array<string,string> $options */
     protected array $options = [];
     /** @var string[] $values */
     protected array $values = [];
@@ -81,7 +81,13 @@ class Select implements Control
      */
     public function options(array $options): self
     {
-        $this->options = $options;
+        $this->options = [];
+        foreach ($options as $key => $value) {
+            if (is_int($key)) {
+                $key = $value;
+            }
+            $this->options[$key] = $value ?: '...';
+        }
         if (!isset($this->options[''])) {
             $this->options = ['' => '...'] + $this->options; // Add empty option if not present
         }
@@ -158,7 +164,7 @@ class Select implements Control
         }
         foreach ($this->options as $key => $value) {
             $option = $doc->createElement('option', $value);
-            $option->setAttribute('value', strval($key));
+            $option->setAttribute('value', $key);
             if (in_array($key, $this->values)) {
                 $option->setAttribute('selected', 'selected');
             }

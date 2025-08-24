@@ -162,7 +162,9 @@ class SelectOrType implements Control
             $caption = $value ?: '...';
             $isLast = $i == count($this->options) - 1;
             $option = $doc->createElement('option', $caption);
-            if (!$isLast) {
+            if ($isLast) {
+                $option->setAttribute('value', '');
+            } else {
                 $option->setAttribute('value', $value);
                 if ($value == $this->value) {
                     $option->setAttribute('selected', 'selected');
