@@ -12,7 +12,7 @@ E::$style = 'bulma';
 
 // create a form object
 $form = E::form([
-    E::field(E::selectOrType('room', ['Bathroom', 'Kitchen'], 'Type a room name ...')->required(), E::label('Select a room')),
+    E::field(E::selectOrType('room', ['Bathroom', 'Kitchen'], 'Type a room name ...')->required(), E::label('Select a room'), [V::regex('/^l/', 'Should start with an "L"')]),
     E::field(E::submit('Save')),
 ]);
 
