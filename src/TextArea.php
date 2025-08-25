@@ -14,12 +14,6 @@ class TextArea extends Input
         $this->tag('textarea');
     }
 
-    public function type(string $type): self
-    {
-        $this->type = strtolower($type);
-        return $this;
-    }
-
     public function name(string $name): self
     {
         $this->name = $name;
@@ -59,7 +53,6 @@ class TextArea extends Input
     public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $textarea = $this->renderElement($doc);
-        $textarea->setAttribute('type', $this->type);
         $textarea->setAttribute('name', $this->name);
         $textarea->textContent = $this->value;
         return $textarea;
