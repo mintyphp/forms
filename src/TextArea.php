@@ -9,9 +9,17 @@ class TextArea extends Input
 {
     use HtmlElement;
 
+    protected int $rows = 0;
+
     public function __construct()
     {
         $this->tag('textarea');
+    }
+
+    public function rows(int $rows): self
+    {
+        $this->rows = $rows;
+        return $this;
     }
 
     public function name(string $name): self
@@ -53,6 +61,9 @@ class TextArea extends Input
     public function renderDom(\DOMDocument $doc): \DOMElement
     {
         $textarea = $this->renderElement($doc);
+        if ($this->rows > 0) {
+            $textarea->setAttribute('rows', strval($this->rows));
+        }
         $textarea->setAttribute('name', $this->name);
         $textarea->textContent = $this->value;
         return $textarea;
