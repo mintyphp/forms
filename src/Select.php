@@ -167,7 +167,7 @@ class Select implements Control
             $select->setAttribute('multiple', 'multiple');
         }
         if ($this->size) {
-            $select->setAttribute('size', strval($size));
+            $select->setAttribute('size', strval($this->size));
         }
         if ($this->required) {
             $select->setAttribute('required', 'required');
