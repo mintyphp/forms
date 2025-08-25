@@ -23,6 +23,7 @@ class Select implements Control
     protected string $autocomplete = '';
 
     protected bool $multiple = false;
+    protected int $size = 0;
 
     public function __construct()
     {
@@ -32,6 +33,12 @@ class Select implements Control
     public function multiple(): self
     {
         $this->multiple = true;
+        return $this;
+    }
+
+    public function size(int $size): self
+    {
+        $this->size = $size;
         return $this;
     }
 
@@ -158,6 +165,9 @@ class Select implements Control
         $select->setAttribute('name', $this->name);
         if ($this->multiple) {
             $select->setAttribute('multiple', 'multiple');
+        }
+        if ($this->size) {
+            $select->setAttribute('size', strval($size));
         }
         if ($this->required) {
             $select->setAttribute('required', 'required');
