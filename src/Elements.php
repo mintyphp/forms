@@ -124,7 +124,7 @@ class Elements
         return $input;
     }
 
-    public static function textarea(string $name = '', int $rows = 5, string $placeholder = ''): TextArea
+    public static function textarea(string $name = '', int $rows = 0, string $placeholder = ''): TextArea
     {
         /** @var TextArea */
         $textarea = self::create('TextArea');
