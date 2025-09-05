@@ -12,8 +12,7 @@ E::$style = 'bulma';
 
 // create a form object
 $form = E::form([
-    E::field(E::selectOrType('room', ['Bathroom', 'Kitchen'], 'Type a room name ...')->required(), E::label('Select a room'), [V::regex('/^l/', 'Should start with an "L"')]),
-    E::field(E::submit('Save')),
+    E::field(E::text('username')->required(), E::label('Username'), [V::maxLength(10, 'At most 10 characters')]),
 ]);
 
 // check if the form has been submitted
@@ -25,15 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // extract the data
         $data = $form->extract();
         // process the data (e.g., login, save to database, etc.)
-        if (strtolower($data['room']) == 'living') {
-            // redirect to the dashboard page
-            die('OK');
-        } else {
-            // invalidate credentials
-            $form->addErrors([
-                'room' => 'Invalid room name, try "Living"',
-            ]);
-        }
+        die(header('Location: redirect.php?returnUrl=text.php'));
     }
 } else {
     // if the form is not submitted, fill it with empty values
@@ -47,8 +38,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.3/css/bulma.min.css">
 </head>
 
-<body class="container p-5">
-    <?php $form->render(); ?>
+<body>
+    <div class="container my-5">
+        <?php $form->render(); ?>
+    </div>
 </body>
 
 </html>

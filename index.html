@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/1.0.3/css/bulma.min.css">
+</head>
+
+<body class="container p-5">
+    <h1 class="title">Kitchen sink</h1>
+    <h2 class="subtitle">Showing all components in MintyPHP forms</h2>
+    <br>
+    <p class="content">
+        These are simple examples of form elements. When the form is submitted, you will be redirected to a
+        "processing" page, which then redirects you back to the form. This simulates processing the data (e.g., saving to a
+        database) without actually doing anything.
+    </p>
+    <br>
+
+    <h2 class="title is-4">text</h2>
+    <pre>E::field(E::text('username')->required(), E::label('Username'), [V::maxLength(10, 'At most 10 characters')])</pre>
+    <iframe src="/tests/manual/text.php" style="width: 100%; height: 150px; border: 1px silver solid;"></iframe><br>
+    <br>
+
+    <h2 class="title is-4">select</h2>
+    <pre>E::field(E::select('room', ['b'=>'Bathroom', 'k'=>'Kitchen'])->required(), E::label('Select a room'))</pre>
+    <iframe src="/tests/manual/select.php" style="width: 100%; height: 150px; border: 1px silver solid;"></iframe><br>
+    <br>
+
+    <h2 class="title is-4">select-or-type</h2>
+    <pre>E::field(E::selectOrType('room', ['Bathroom', 'Kitchen'], 'Type a room name ...'), E::label('Select a room'), [V::regex('/^l/i', 'Must start with "L"')])</pre>
+    <iframe src="/tests/manual/select-or-type.php" style="width: 100%; height: 150px; border: 1px silver solid;"></iframe><br>
+    <br>
+
+</body>
+
+</html>
