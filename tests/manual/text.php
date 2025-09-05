@@ -12,7 +12,8 @@ E::$style = 'bulma';
 
 // create a form object
 $form = E::form([
-    E::field(E::text('username')->required(), E::label('Username'), [V::maxLength(10, 'At most 10 characters')]),
+    E::field(E::submit('Save')->attribute('style','float:right; margin-top: 2rem;')),
+    E::field(E::text('username')->required(), E::label('Username'), [V::maxLength(10, 'At most 10 characters')])->attribute('style','float:left;'),
 ]);
 
 // check if the form has been submitted

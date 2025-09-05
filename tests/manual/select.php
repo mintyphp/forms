@@ -12,6 +12,7 @@ E::$style = 'bulma';
 
 // create a form object
 $form = E::form([
+    E::field(E::submit('Save')->attribute('style','float:right; margin-top: 2rem;')),
     E::field(E::select('room', ['b'=>'Bathroom', 'k'=>'Kitchen'])->required(), E::label('Select a room')),
 ]);
 

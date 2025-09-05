@@ -12,7 +12,8 @@ E::$style = 'bulma';
 
 // create a form object
 $form = E::form([
-    E::field(E::selectOrType('room', ['Bathroom', 'Kitchen'], 'Type a room name ...')->required(), E::label('Select a room')),
+    E::field(E::submit('Submit')->attribute('style','float:right; margin-top: 2rem; background-color: #eee;')),
+    E::field(E::selectOrType('room', ['Bathroom', 'Kitchen'], 'Type a room name ...')->required(), E::label('Select a room'), [V::regex('/^l/i', 'Must start with "L"')]),
 ]);
 
 // check if the form has been submitted
